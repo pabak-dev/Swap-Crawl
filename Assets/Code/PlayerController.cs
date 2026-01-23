@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float swapCooldown = 3f;
+    public LayerMask targetLayer;
     
     private Rigidbody2D rb;
     private EntityInventory myInventory;
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
         if (Time.time < lastSwapTime + swapCooldown) return;
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 50, targetLayer);
 
         if (hit.collider != null)
         {
