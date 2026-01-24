@@ -4005,9 +4005,11 @@ MonoBehaviour:
   bobSpeed: 2
   bobAmount: 0.05
   isRanged: 1
+  orbitRadius: 1.05
+  pivotOffset: {x: 0, y: 0}
   bodyTransform: {fileID: 941637549}
-  swingAngle: 115
-  swingDuration: 0.4
+  swingAngle: 120
+  swingDuration: 0.25
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

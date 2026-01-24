@@ -11,14 +11,20 @@ public class WeaponVisuals : MonoBehaviour
     public float bobAmount = 0.05f;
     public bool isRanged = true;
 
+    [Header("Ranged Settings")]
+    public float orbitRadius = 1.2f;
+    public Vector2 pivotOffset = new Vector2(0, 0.5f);
+
     [Header("Constraint")]
     public Transform bodyTransform;
 
     private SpriteRenderer sr;
+    private SpriteRenderer bodyRenderer;
     private Vector3 defaultPos;
     private Vector3 parentDefaultPos;
     private bool isBusy;
     private float currentAngle;
+    private float currentRangedRecoil;
 
     private void Awake()
     {
@@ -29,9 +35,65 @@ public class WeaponVisuals : MonoBehaviour
         {
             parentDefaultPos = transform.parent.localPosition;
         }
+
+        if (bodyTransform != null)
+        {
+            bodyRenderer = bodyTransform.GetComponent<SpriteRenderer>();
+            if (bodyRenderer == null) bodyRenderer = bodyTransform.GetComponentInChildren<SpriteRenderer>();
+        }
     }
 
     private void Update()
+    {
+        if (isRanged)
+        {
+            HandleRangedOrbit();
+        }
+        else
+        {
+            HandleMeleeBehavior();
+        }
+    }
+
+    private void HandleRangedOrbit()
+    {
+        if (bodyTransform == null) return;
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 orbitCenter = bodyTransform.position + (Vector3)pivotOffset;
+        Vector2 direction = (mousePos - orbitCenter).normalized;
+
+        float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        float activeRadius = orbitRadius - currentRangedRecoil;
+        Vector3 targetPos = orbitCenter + (Vector3)(direction * activeRadius);
+        
+        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * rotationSmoothness);
+        transform.rotation = Quaternion.Euler(0, 0, baseAngle);
+
+        if (Mathf.Abs(baseAngle) > 90)
+        {
+            transform.localScale = new Vector3(1, -1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        if (bodyRenderer != null)
+        {
+            if (direction.y > 0.1f) 
+            {
+                sr.sortingOrder = bodyRenderer.sortingOrder - 1;
+            }
+            else 
+            {
+                sr.sortingOrder = bodyRenderer.sortingOrder + 1;
+            }
+        }
+    }
+
+    private void HandleMeleeBehavior()
     {
         float facingDir = 1f;
         if (bodyTransform != null)
@@ -92,7 +154,15 @@ public class WeaponVisuals : MonoBehaviour
     public void TriggerRecoil()
     {
         if (isBusy) return;
-        StartCoroutine(RecoilRoutine());
+
+        if (isRanged)
+        {
+            StartCoroutine(RangedRecoilRoutine());
+        }
+        else
+        {
+            StartCoroutine(RecoilRoutine());
+        }
     }
 
     [Header("Swing Settings")]
@@ -103,6 +173,28 @@ public class WeaponVisuals : MonoBehaviour
     {
         if (currentSwingRoutine != null) StopCoroutine(currentSwingRoutine);
         currentSwingRoutine = StartCoroutine(SwingRoutine());
+    }
+
+    private IEnumerator RangedRecoilRoutine()
+    {
+        float duration = 0.05f;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            currentRangedRecoil = Mathf.Lerp(0f, 0.4f, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        duration = 0.2f;
+        elapsed = 0f;
+        while (elapsed < duration)
+        {
+            currentRangedRecoil = Mathf.Lerp(0.4f, 0f, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        currentRangedRecoil = 0f;
     }
 
     private IEnumerator RecoilRoutine()
