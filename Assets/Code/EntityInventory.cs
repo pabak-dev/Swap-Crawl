@@ -37,6 +37,12 @@ public class EntityInventory : MonoBehaviour
         if (currentWeapon != null && heldItemRenderer != null)
         {
             heldItemRenderer.sprite = currentWeapon.sprite;
+            
+            WeaponVisuals visuals = heldItemRenderer.GetComponent<WeaponVisuals>();
+            if (visuals != null)
+            {
+                visuals.isRanged = currentWeapon.isRanged;
+            }
         }
     }
 }

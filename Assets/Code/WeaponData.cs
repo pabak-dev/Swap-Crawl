@@ -8,4 +8,8 @@ public class WeaponData : ScriptableObject
     public float range;
     public float fireRate;
     public Sprite sprite;
+
+    [Header("Visuals")]
+    public GameObject attackVFX;
+    public bool isRanged;
 }

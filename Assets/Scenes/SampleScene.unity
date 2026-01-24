@@ -132,6 +132,8 @@ GameObject:
   - component: {fileID: 14877222}
   - component: {fileID: 14877221}
   - component: {fileID: 14877223}
+  - component: {fileID: 14877224}
+  - component: {fileID: 14877225}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -261,6 +263,36 @@ MonoBehaviour:
   currentWeapon: {fileID: 11400000, guid: 0acfb2ec6b507ed40a10db4d14acd6b3, type: 2}
   currentTool: {fileID: 0}
   heldItemRenderer: {fileID: 597800160}
+--- !u!114 &14877224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14877217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0a6a540293ce440b9abce41358a99a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 10
+--- !u!114 &14877225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14877217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5075ae0e53f24640ab3085d8985ba1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponHandler
+  inventory: {fileID: 14877223}
+  weaponVisuals: {fileID: 597800161}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &46208384
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,6 +3565,7 @@ GameObject:
   - component: {fileID: 437407712}
   - component: {fileID: 437407713}
   - component: {fileID: 437407714}
+  - component: {fileID: 437407715}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Untagged
@@ -3687,6 +3720,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &437407715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437407709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0a6a540293ce440b9abce41358a99a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3944,11 +3990,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7667f2cdf4d4d1428c34c5648d5a74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponVisuals
-  visualRotationOffset: -45
+  visualRotationOffset: -10
   rotationSmoothness: 15
   bobSpeed: 2
   bobAmount: 0.05
+  isRanged: 1
   bodyTransform: {fileID: 941637549}
+  swingAngle: 115
+  swingDuration: 0.4
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

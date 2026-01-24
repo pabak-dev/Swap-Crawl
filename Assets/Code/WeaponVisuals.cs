@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class WeaponVisuals : MonoBehaviour
 {
     [Header("Settings")]
@@ -8,6 +9,7 @@ public class WeaponVisuals : MonoBehaviour
     public float rotationSmoothness = 15f;
     public float bobSpeed = 2f;
     public float bobAmount = 0.05f;
+    public bool isRanged = true;
 
     [Header("Constraint")]
     public Transform bodyTransform;
@@ -54,25 +56,18 @@ public class WeaponVisuals : MonoBehaviour
 
     private void HandleSmoothAiming(float facingDir)
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePos - transform.parent.position;
+        float targetAngle = 0f;
 
-        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // if (facingDir > 0) 
-        // {
-        //     if (Mathf.Abs(targetAngle) > 89f)
-        //     {
-        //         targetAngle = 45f;
-        //     }
-        // }
-        // else 
-        // {
-        //     if (Mathf.Abs(targetAngle) < 91)
-        //     {
-        //         targetAngle = 135f;
-        //     }
-        // }
+        if (isRanged)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 direction = mousePos - transform.parent.position;
+            targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        }
+        else
+        {
+            targetAngle = (facingDir > 0) ? 0f : 180f;
+        }
 
         currentAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * rotationSmoothness);
 
@@ -100,10 +95,14 @@ public class WeaponVisuals : MonoBehaviour
         StartCoroutine(RecoilRoutine());
     }
 
+    [Header("Swing Settings")]
+    public float swingAngle = 120f;
+    public float swingDuration = 0.25f;
+
     public void TriggerSwing()
     {
-        if (isBusy) return;
-        StartCoroutine(SwingRoutine());
+        if (currentSwingRoutine != null) StopCoroutine(currentSwingRoutine);
+        currentSwingRoutine = StartCoroutine(SwingRoutine());
     }
 
     private IEnumerator RecoilRoutine()
@@ -132,22 +131,61 @@ public class WeaponVisuals : MonoBehaviour
         isBusy = false;
     }
 
+    private Coroutine currentSwingRoutine;
+
     private IEnumerator SwingRoutine()
     {
         isBusy = true;
+        
+        float dirMultiplier = (transform.localScale.y < 0) ? -1f : 1f;
+        
         Quaternion startRot = transform.localRotation;
-        Quaternion endRot = Quaternion.Euler(0, 0, startRot.eulerAngles.z - 100); 
+        float baseZ = startRot.eulerAngles.z;
 
-        float elapsed = 0;
-        float duration = 0.15f;
+        float windUpAngle = baseZ + (20f * dirMultiplier); 
+        float strikeAngle = baseZ - (swingAngle * dirMultiplier); 
 
-        while (elapsed < duration)
+        float timer = 0f;
+        
+        float windUpTime = swingDuration * 0.2f;
+        while (timer < windUpTime)
         {
-            transform.localRotation = Quaternion.Slerp(startRot, endRot, elapsed / duration);
-            elapsed += Time.deltaTime;
+            timer += Time.deltaTime;
+            float t = timer / windUpTime;
+            t = 1f - Mathf.Pow(1f - t, 3); 
+            
+            Quaternion target = Quaternion.Euler(0, 0, Mathf.LerpAngle(baseZ, windUpAngle, t));
+            transform.localRotation = target;
             yield return null;
         }
 
+        timer = 0f;
+        float strikeTime = swingDuration * 0.4f;
+        while (timer < strikeTime)
+        {
+            timer += Time.deltaTime;
+            float t = timer / strikeTime;
+            t = t * t * t * t; 
+            
+            Quaternion target = Quaternion.Euler(0, 0, Mathf.LerpAngle(windUpAngle, strikeAngle, t));
+            transform.localRotation = target;
+            yield return null;
+        }
+
+        timer = 0f;
+        float recoveryTime = swingDuration * 0.4f;
+        while (timer < recoveryTime)
+        {
+            timer += Time.deltaTime;
+            float t = timer / recoveryTime;
+            t = t * t * (3f - 2f * t);
+            
+            Quaternion target = Quaternion.Euler(0, 0, Mathf.LerpAngle(strikeAngle, baseZ, t));
+            transform.localRotation = target;
+            yield return null;
+        }
+
+        transform.localRotation = Quaternion.Euler(0, 0, baseZ);
         isBusy = false; 
     }
 }
