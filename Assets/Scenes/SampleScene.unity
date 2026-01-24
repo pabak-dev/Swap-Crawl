@@ -276,6 +276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 50000
+  flashMaterial: {fileID: 2100000, guid: 1c731a44c742b2c4f83d1b264fc4697e, type: 2}
+  flashDuration: 0.1
 --- !u!114 &14877225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3610,6 +3612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 1000
+  flashMaterial: {fileID: 0}
+  flashDuration: 0.1
 --- !u!114 &321432346
 MonoBehaviour:
   m_ObjectHideFlags: 0
