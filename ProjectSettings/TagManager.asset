@@ -44,11 +44,11 @@ TagManager:
   - name: Floor
     uniqueID: 2366460685
     locked: 0
-  - name: Actors
-    uniqueID: 1986196941
-    locked: 0
   - name: Walls
     uniqueID: 2819002779
+    locked: 0
+  - name: Actors
+    uniqueID: 1986196941
     locked: 0
   m_RenderingLayers:
   - Default

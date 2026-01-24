@@ -14,6 +14,7 @@ public class WeaponVisuals : MonoBehaviour
 
     private SpriteRenderer sr;
     private Vector3 defaultPos;
+    private Vector3 parentDefaultPos;
     private bool isBusy;
     private float currentAngle;
 
@@ -21,52 +22,57 @@ public class WeaponVisuals : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         defaultPos = transform.localPosition;
+        
+        if (transform.parent != null)
+        {
+            parentDefaultPos = transform.parent.localPosition;
+        }
     }
 
     private void Update()
     {
-        if (!isBusy)
-        {
-            float newY = defaultPos.y + Mathf.Sin(Time.time * bobSpeed) * bobAmount;
-            
-            float targetX = defaultPos.x;
-            if (Mathf.Abs(currentAngle) > 90)
-            {
-                targetX = -Mathf.Abs(defaultPos.x);
-            }
-            else
-            {
-                targetX = Mathf.Abs(defaultPos.x);
-            }
-
-            transform.localPosition = new Vector3(targetX, newY, defaultPos.z);
-        }
-
-        HandleSmoothAiming();
-    }
-
-    private void HandleSmoothAiming()
-    {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePos - transform.parent.position;
-
         float facingDir = 1f;
         if (bodyTransform != null)
         {
             facingDir = Mathf.Sign(bodyTransform.localScale.x);
         }
 
+        if (!isBusy)
+        {
+            float newY = defaultPos.y + Mathf.Sin(Time.time * bobSpeed) * bobAmount;
+            transform.localPosition = new Vector3(defaultPos.x, newY, defaultPos.z);
+
+            if (transform.parent != null)
+            {
+                float targetParentX = (facingDir > 0) ? Mathf.Abs(parentDefaultPos.x) : -Mathf.Abs(parentDefaultPos.x);
+                transform.parent.localPosition = new Vector3(targetParentX, parentDefaultPos.y, parentDefaultPos.z);
+            }
+        }
+
+        HandleSmoothAiming(facingDir);
+    }
+
+    private void HandleSmoothAiming(float facingDir)
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePos - transform.parent.position;
+
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        if (facingDir > 0)
-        {
-            targetAngle = Mathf.Clamp(targetAngle, -80f, 80f);
-        }
-        else
-        {
-            if (targetAngle <= 0) targetAngle += 360;
-            targetAngle = Mathf.Clamp(targetAngle, 100f, 260f);
-        }
+        // if (facingDir > 0) 
+        // {
+        //     if (Mathf.Abs(targetAngle) > 89f)
+        //     {
+        //         targetAngle = 45f;
+        //     }
+        // }
+        // else 
+        // {
+        //     if (Mathf.Abs(targetAngle) < 91)
+        //     {
+        //         targetAngle = 135f;
+        //     }
+        // }
 
         currentAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * rotationSmoothness);
 
@@ -106,7 +112,6 @@ public class WeaponVisuals : MonoBehaviour
         
         Vector3 recoilOffset = transform.right * -0.2f; 
         Vector3 startPos = transform.localPosition;
-        Vector3 endPos = startPos + recoilOffset; 
         
         float timer = 0;
         while(timer < 0.1f) 
@@ -117,10 +122,12 @@ public class WeaponVisuals : MonoBehaviour
         }
         while(timer < 0.2f) 
         {
-             transform.localPosition = Vector3.Lerp(transform.localPosition, startPos, Time.deltaTime * 10f);
-             timer += Time.deltaTime;
-             yield return null;
+            transform.localPosition = Vector3.Lerp(transform.localPosition, startPos, Time.deltaTime * 10f);
+            timer += Time.deltaTime;
+            yield return null;
         }
+        
+        transform.localPosition = defaultPos;
         
         isBusy = false;
     }
