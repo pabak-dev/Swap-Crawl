@@ -295,6 +295,7 @@ MonoBehaviour:
     m_Bits: 64
   usePlayerInput: 1
   targetTransform: {fileID: 0}
+  knockbackForce: 5
 --- !u!1 &46208384
 GameObject:
   m_ObjectHideFlags: 0
@@ -3595,6 +3596,7 @@ MonoBehaviour:
     m_Bits: 128
   usePlayerInput: 0
   targetTransform: {fileID: 14877219}
+  knockbackForce: 8
 --- !u!114 &321432345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3607,7 +3609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb0a6a540293ce440b9abce41358a99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 10
+  maxHealth: 1000
 --- !u!114 &321432346
 MonoBehaviour:
   m_ObjectHideFlags: 0

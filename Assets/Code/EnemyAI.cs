@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     private WeaponHandler weaponHandler;
     private WeaponVisuals weaponVisuals;
     private Transform visualBody;
+    private bool isKnockedBack;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (isKnockedBack) return;
         if (playerTarget == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, playerTarget.position);
@@ -48,6 +50,20 @@ public class EnemyAI : MonoBehaviour
         }
 
         HandleCombat(distanceToPlayer);
+    }
+
+    public void ApplyKnockback(Vector2 force)
+    {
+        isKnockedBack = true;
+        rb.AddForce(force, ForceMode2D.Impulse);
+        
+        CancelInvoke(nameof(StopKnockback));
+        Invoke(nameof(StopKnockback), 0.2f);
+    }
+
+    private void StopKnockback()
+    {
+        isKnockedBack = false;
     }
 
     private void HandleCombat(float distance)

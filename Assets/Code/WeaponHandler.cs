@@ -10,6 +10,9 @@ public class WeaponHandler : MonoBehaviour
     [Header("Control")]
     public bool usePlayerInput = true;
     public Transform targetTransform;
+    
+    [Header("Combat Settings")]
+    public float knockbackForce = 15f;
 
     private float nextAttackTime;
 
@@ -75,6 +78,29 @@ public class WeaponHandler : MonoBehaviour
             if (targetHealth != null)
             {
                 targetHealth.TakeDamage(weapon.damage);
+            }
+
+            Vector2 direction = (hit.transform.position - transform.position).normalized;
+            Vector2 force = direction * knockbackForce;
+
+            PlayerController pc = hit.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.ApplyKnockback(force);
+                continue;
+            }
+
+            EnemyAI ai = hit.GetComponent<EnemyAI>();
+            if (ai != null)
+            {
+                ai.ApplyKnockback(force);
+                continue;
+            }
+
+            Rigidbody2D targetRb = hit.GetComponent<Rigidbody2D>();
+            if (targetRb != null)
+            {
+                targetRb.AddForce(force, ForceMode2D.Impulse);
             }
         }
     }

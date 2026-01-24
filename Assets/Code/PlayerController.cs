@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private EntityInventory myInventory;
     private Vector2 movement;
     private float lastSwapTime;
+    private bool isKnockedBack;
 
     private void Awake()
     {
@@ -37,8 +38,24 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isKnockedBack) return;
+
         float speedMult = (myInventory.currentTool != null) ? myInventory.currentTool.moveSpeedMultiplier : 1f;
         rb.linearVelocity = movement.normalized * moveSpeed * speedMult;
+    }
+
+    public void ApplyKnockback(Vector2 force)
+    {
+        isKnockedBack = true;
+        rb.AddForce(force, ForceMode2D.Impulse);
+        
+        CancelInvoke(nameof(StopKnockback));
+        Invoke(nameof(StopKnockback), 0.2f);
+    }
+
+    private void StopKnockback()
+    {
+        isKnockedBack = false;
     }
 
     private void TrySwap(EntityInventory.SwapType type)
