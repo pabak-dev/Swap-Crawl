@@ -7,17 +7,30 @@ public class WeaponHandler : MonoBehaviour
     public WeaponVisuals weaponVisuals;
     public LayerMask enemyLayer;
 
+    [Header("Control")]
+    public bool usePlayerInput = true;
+    public Transform targetTransform;
+
     private float nextAttackTime;
+
+    private Vector3 AimPosition
+    {
+        get
+        {
+            if (targetTransform != null) return targetTransform.position;
+            return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+    }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (usePlayerInput && Input.GetMouseButtonDown(0))
         {
             AttemptAttack();
         }
     }
 
-    private void AttemptAttack()
+    public void AttemptAttack()
     {
         WeaponData weapon = inventory.currentWeapon;
         if (weapon == null) return;
@@ -70,8 +83,7 @@ public class WeaponHandler : MonoBehaviour
     {
         weaponVisuals.TriggerRecoil();
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 aimDir = (mousePos - transform.position).normalized;
+        Vector2 aimDir = (AimPosition - transform.position).normalized;
 
         if (weapon.attackVFX != null)
         {

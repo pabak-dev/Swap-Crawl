@@ -17,6 +17,7 @@ public class WeaponVisuals : MonoBehaviour
 
     [Header("Constraint")]
     public Transform bodyTransform;
+    public Transform targetTransform;
 
     private SpriteRenderer sr;
     private SpriteRenderer bodyRenderer;
@@ -25,6 +26,19 @@ public class WeaponVisuals : MonoBehaviour
     private bool isBusy;
     private float currentAngle;
     private float currentRangedRecoil;
+
+    [Header("Swing Settings")]
+    public float swingAngle = 120f;
+    public float swingDuration = 0.25f;
+
+    private Vector3 AimPosition
+    {
+        get
+        {
+            if (targetTransform != null) return targetTransform.position;
+            return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+    }
 
     private void Awake()
     {
@@ -59,9 +73,8 @@ public class WeaponVisuals : MonoBehaviour
     {
         if (bodyTransform == null) return;
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 orbitCenter = bodyTransform.position + (Vector3)pivotOffset;
-        Vector2 direction = (mousePos - orbitCenter).normalized;
+        Vector2 direction = (AimPosition - orbitCenter).normalized;
 
         float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         
@@ -122,8 +135,7 @@ public class WeaponVisuals : MonoBehaviour
 
         if (isRanged)
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 direction = mousePos - transform.parent.position;
+            Vector3 direction = AimPosition - transform.parent.position;
             targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         }
         else
@@ -164,10 +176,6 @@ public class WeaponVisuals : MonoBehaviour
             StartCoroutine(RecoilRoutine());
         }
     }
-
-    [Header("Swing Settings")]
-    public float swingAngle = 120f;
-    public float swingDuration = 0.25f;
 
     public void TriggerSwing()
     {
@@ -230,6 +238,7 @@ public class WeaponVisuals : MonoBehaviour
         isBusy = true;
         
         float dirMultiplier = (transform.localScale.y < 0) ? -1f : 1f;
+        if (bodyTransform.localScale.x < 0) dirMultiplier = -1f;
         
         Quaternion startRot = transform.localRotation;
         float baseZ = startRot.eulerAngles.z;
