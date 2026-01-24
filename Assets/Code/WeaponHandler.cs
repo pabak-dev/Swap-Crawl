@@ -69,7 +69,29 @@ public class WeaponHandler : MonoBehaviour
     private void FireRifle(WeaponData weapon)
     {
         weaponVisuals.TriggerRecoil();
-        // add raycast code later
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 aimDir = (mousePos - transform.position).normalized;
+
+        if (weapon.attackVFX != null)
+        {
+            float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+            Quaternion rot = Quaternion.Euler(0, 0, angle);
+            Instantiate(weapon.attackVFX, transform.position + (Vector3)aimDir * 0.5f, rot);
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, aimDir, weapon.range, enemyLayer);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.gameObject == gameObject) return;
+
+            Health targetHealth = hit.collider.GetComponent<Health>();
+            if (targetHealth != null)
+            {
+                targetHealth.TakeDamage(weapon.damage);
+            }
+        }
     }
 
     private void OnDrawGizmosSelected()
