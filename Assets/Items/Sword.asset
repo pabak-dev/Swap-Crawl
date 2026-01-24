@@ -16,4 +16,4 @@ MonoBehaviour:
   damage: 0
   range: 0
   fireRate: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 2bd1557b0f5e72e43a8d4703400e6c6d, type: 3}

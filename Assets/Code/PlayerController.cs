@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         float speedMult = (myInventory.currentTool != null) ? myInventory.currentTool.moveSpeedMultiplier : 1f;
-        rb.MovePosition(rb.position + moveSpeed * speedMult * Time.fixedDeltaTime * movement.normalized);
+        rb.linearVelocity = movement.normalized * moveSpeed * speedMult;
     }
 
     private void TrySwap(EntityInventory.SwapType type)
