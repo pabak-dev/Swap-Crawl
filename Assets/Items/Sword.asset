@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: 
   damage: 4
   range: 0.725
-  fireRate: 1.4
+  fireRate: 1.65
   sprite: {fileID: 21300000, guid: 2bd1557b0f5e72e43a8d4703400e6c6d, type: 3}
   attackVFX: {fileID: 0}
   isRanged: 0

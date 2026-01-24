@@ -189,7 +189,7 @@ public class WeaponVisuals : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
-            currentRangedRecoil = Mathf.Lerp(0f, 0.4f, elapsed / duration);
+            currentRangedRecoil = Mathf.Lerp(0f, 0.65f, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -198,7 +198,7 @@ public class WeaponVisuals : MonoBehaviour
         elapsed = 0f;
         while (elapsed < duration)
         {
-            currentRangedRecoil = Mathf.Lerp(0.4f, 0f, elapsed / duration);
+            currentRangedRecoil = Mathf.Lerp(0.65f, 0f, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }

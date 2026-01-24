@@ -7,12 +7,20 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float swapCooldown = 3f;
     public LayerMask targetLayer;
-    
+
+    [Header("Visuals")]
+    public SwapZap swapZapPrefab;
+
+    public bool IsSwapReady => Time.time >= lastSwapTime + swapCooldown;
+
     private Rigidbody2D rb;
     private EntityInventory myInventory;
     private Vector2 movement;
     private float lastSwapTime;
     private bool isKnockedBack;
+
+    [Header("Settings")]
+    public float maxSwapRange = 10f;
 
     private void Awake()
     {
@@ -60,10 +68,12 @@ public class PlayerController : MonoBehaviour
 
     private void TrySwap(EntityInventory.SwapType type)
     {
-        if (Time.time < lastSwapTime + swapCooldown) return;
+        if (!IsSwapReady) return;
 
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 50, targetLayer);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePos - transform.position).normalized;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, maxSwapRange, targetLayer);
 
         if (hit.collider != null)
         {
@@ -72,6 +82,12 @@ public class PlayerController : MonoBehaviour
             {
                 myInventory.SwapItems(targetInventory, type);
                 lastSwapTime = Time.time;
+
+                if (swapZapPrefab != null)
+                {
+                    SwapZap zap = Instantiate(swapZapPrefab, transform.position, Quaternion.identity);
+                    zap.Initialize(transform.position, targetInventory.transform.position);
+                }
             }
         }
     }
