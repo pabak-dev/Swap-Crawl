@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5126245734985574295}
   - component: {fileID: 5288418000755331019}
-  - component: {fileID: -8357399593659711544}
   m_Layer: 0
   m_Name: UI_Reticle
   m_TagString: Untagged
@@ -80,7 +79,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1986196941
   m_SortingLayer: 3
-  m_SortingOrder: 100
+  m_SortingOrder: 32767
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 34fbdec3faa21854da1491a4d09d5519, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -92,21 +91,3 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &-8357399593659711544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139721152095763612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 204b57755abec884e8d25c2a09b9a384, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwapReticle
-  player: {fileID: 0}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  readyColor: {r: 1, g: 1, b: 1, a: 0.627451}
-  cooldownColor: {r: 1, g: 0.2, b: 0.2, a: 0.5}

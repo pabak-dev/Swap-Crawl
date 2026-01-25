@@ -1,58 +1,57 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class SwapReticle : MonoBehaviour
 {
-    [Header("References")]
-    public PlayerController player;
-    public LayerMask targetLayer;
+    public GameObject reticlePrefab;
 
     [Header("Visuals")]
-    public Color readyColor = Color.white;
+    public Color selectedColor = Color.green;
     public Color cooldownColor = new(1, 0.2f, 0.2f, 0.5f);
+    public Color availableColor = Color.white;
 
-    private SpriteRenderer sr;
+    private List<SpriteRenderer> activeReticles = new();
 
-    private void Awake()
+    public void ShowReticles(List<EntityInventory> targets, EntityInventory lockedTarget, bool isReady)
     {
-        sr = GetComponent<SpriteRenderer>();
-        sr.enabled = false;
-        
-        sr.sortingOrder = 100;
-    }
-
-    private void LateUpdate()
-    {
-        if (player == null) return;
-
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (mousePos - player.transform.position).normalized;
-
-        RaycastHit2D hit = Physics2D.Raycast(player.transform.position, direction, 10f, targetLayer);
-
-        bool isValidTarget = false;
-
-        if (hit.collider != null)
+        while (activeReticles.Count < targets.Count)
         {
-            if (hit.collider.gameObject != player.gameObject)
+            GameObject obj = Instantiate(reticlePrefab, transform);
+            activeReticles.Add(obj.GetComponent<SpriteRenderer>());
+        }
+
+        for (int i = 0; i < activeReticles.Count; i++)
+        {
+            if (i < targets.Count)
             {
-                EntityInventory targetInv = hit.collider.GetComponent<EntityInventory>();
-                if (targetInv != null)
+                activeReticles[i].gameObject.SetActive(true);
+                activeReticles[i].transform.position = targets[i].transform.position;
+                
+                if (!isReady)
                 {
-                    isValidTarget = true;
-                    transform.position = hit.transform.position;
+                    activeReticles[i].color = cooldownColor;
+                }
+                else if (targets[i] == lockedTarget)
+                {
+                    activeReticles[i].color = selectedColor;
+                }
+                else
+                {
+                    activeReticles[i].color = availableColor;
                 }
             }
+            else
+            {
+                activeReticles[i].gameObject.SetActive(false);
+            }
         }
+    }
 
-        if (isValidTarget)
+    public void HideAll()
+    {
+        foreach (var r in activeReticles)
         {
-            sr.enabled = true;
-            sr.color = player.IsSwapReady ? readyColor : cooldownColor;
-        }
-        else
-        {
-            sr.enabled = false;
+            r.gameObject.SetActive(false);
         }
     }
 }

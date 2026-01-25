@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(EntityInventory))]
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Visuals")]
     public SwapZap swapZapPrefab;
+    public SwapReticle swapReticleManager;
 
     public bool IsSwapReady => Time.time >= lastSwapTime + swapCooldown;
 
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private float lastSwapTime;
     private bool isKnockedBack;
+
+    private EntityInventory currentHoverTarget;
 
     [Header("Settings")]
     public float maxSwapRange = 10f;
@@ -34,13 +38,29 @@ public class PlayerController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetMouseButtonDown(1)) 
+        bool holdingWeaponSwap = Input.GetMouseButton(1);
+        bool holdingToolSwap = Input.GetKey(KeyCode.E);
+        
+        bool releaseWeapon = Input.GetMouseButtonUp(1);
+        bool releaseTool = Input.GetKeyUp(KeyCode.E);
+
+        if (holdingWeaponSwap || holdingToolSwap || releaseWeapon || releaseTool)
         {
-            TrySwap(EntityInventory.SwapType.Weapon);
+            HandleTargeting();
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        else
         {
-            TrySwap(EntityInventory.SwapType.Tool);
+            if (swapReticleManager != null) swapReticleManager.HideAll();
+            currentHoverTarget = null;
+        }
+
+        if (releaseWeapon)
+        {
+            ExecuteSwap(EntityInventory.SwapType.Weapon);
+        }
+        else if (releaseTool)
+        {
+            ExecuteSwap(EntityInventory.SwapType.Tool);
         }
     }
 
@@ -66,29 +86,54 @@ public class PlayerController : MonoBehaviour
         isKnockedBack = false;
     }
 
-    private void TrySwap(EntityInventory.SwapType type)
+    private void HandleTargeting()
     {
-        if (!IsSwapReady) return;
+        if (swapReticleManager == null) return;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, maxSwapRange, targetLayer);
+        List<EntityInventory> validTargets = new();
+
+        foreach (var hit in hits)
+        {
+            EntityInventory inv = hit.GetComponent<EntityInventory>();
+            if (inv != null && inv != myInventory)
+            {
+                validTargets.Add(inv);
+            }
+        }
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePos - transform.position).normalized;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, maxSwapRange, targetLayer);
-
-        if (hit.collider != null)
+        RaycastHit2D aimHit = Physics2D.Raycast(transform.position, direction, maxSwapRange, targetLayer);
+        
+        currentHoverTarget = null;
+        if (aimHit.collider != null)
         {
-            EntityInventory targetInventory = hit.collider.GetComponent<EntityInventory>();
-            if (targetInventory != null && targetInventory != myInventory)
+            EntityInventory inv = aimHit.collider.GetComponent<EntityInventory>();
+            if (inv != null && inv != myInventory)
             {
-                myInventory.SwapItems(targetInventory, type);
-                lastSwapTime = Time.time;
-
-                if (swapZapPrefab != null)
-                {
-                    SwapZap zap = Instantiate(swapZapPrefab, transform.position, Quaternion.identity);
-                    zap.Initialize(transform.position, targetInventory.transform.position);
-                }
+                currentHoverTarget = inv;
             }
         }
+
+        swapReticleManager.ShowReticles(validTargets, currentHoverTarget, IsSwapReady);
+    }
+
+    private void ExecuteSwap(EntityInventory.SwapType type)
+    {
+        if (currentHoverTarget != null && IsSwapReady)
+        {
+            myInventory.SwapItems(currentHoverTarget, type);
+            lastSwapTime = Time.time;
+
+            if (swapZapPrefab != null)
+            {
+                SwapZap zap = Instantiate(swapZapPrefab, transform.position, Quaternion.identity);
+                zap.Initialize(transform.position, currentHoverTarget.transform.position);
+            }
+        }
+        
+        if (swapReticleManager != null) swapReticleManager.HideAll();
+        currentHoverTarget = null;
     }
 }
