@@ -47,7 +47,7 @@ public class EntityInventory : MonoBehaviour
         }
 
         if (bodyVisuals != null && bodyVisuals.toolOverlay != null)
-        {print("xxx");
+        {
             if (currentTool != null)
             {
                 bodyVisuals.toolOverlay.sprite = currentTool.visualIndicator;

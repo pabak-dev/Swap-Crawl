@@ -7700,6 +7700,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3121563489529622442, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
+      propertyPath: currentTool
+      value: 
+      objectReference: {fileID: 11400000, guid: 1465b7e0fb12e744fb93ee0d3fca061b, type: 2}
     - target: {fileID: 4905109130807867285, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
       propertyPath: m_Name
       value: Skeleton_rifle

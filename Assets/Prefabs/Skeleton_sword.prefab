@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityInventory
   currentWeapon: {fileID: 11400000, guid: 0acfb2ec6b507ed40a10db4d14acd6b3, type: 2}
-  currentTool: {fileID: 11400000, guid: a88f56b380fb9a54eb1f1b207736c5fb, type: 2}
+  currentTool: {fileID: 11400000, guid: fadbd719383ccdd4eab56003f40e77d4, type: 2}
   heldItemRenderer: {fileID: 6098283687829470887}
   bodyVisuals: {fileID: 8145308348165521165}
 --- !u!114 &1651885821977120123
