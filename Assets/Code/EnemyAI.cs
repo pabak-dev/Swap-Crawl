@@ -19,6 +19,12 @@ public class EnemyAI : MonoBehaviour
     public float minFireDelay = 0.3f;
     public float maxFireDelay = 0.8f;
 
+    [Header("Effects")]
+    public GameObject feetDustPrefab;
+    public Transform feetTransform;
+    public float dustSpawnRate = 0.2f;
+    private float dustTimer;
+
     private float currentFireTimer;
 
     private Rigidbody2D rb;
@@ -63,6 +69,21 @@ public class EnemyAI : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             return;
+        }
+
+        if (rb.linearVelocity.sqrMagnitude > 0.01f)
+        {
+            dustTimer -= Time.deltaTime;
+            if (dustTimer <= 0f)
+            {
+                GameObject dust = Instantiate(feetDustPrefab, feetTransform.position, Quaternion.identity);
+                Destroy(dust, 1f);
+                dustTimer = dustSpawnRate;
+            }
+        }
+        else
+        {
+            dustTimer = 0f;
         }
 
         HandleCombat(distanceToPlayer);

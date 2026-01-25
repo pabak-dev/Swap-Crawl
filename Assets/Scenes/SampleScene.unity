@@ -207,7 +207,7 @@ MonoBehaviour:
   maxSwapRange: 10
   feetDustPrefab: {fileID: 9024370011107915148, guid: 930579a6435420443939ec4d5a7816f2, type: 3}
   feetTransform: {fileID: 2057268942}
-  dustSpawnRate: 0.2
+  dustSpawnRate: 0.25
 --- !u!61 &14877222
 BoxCollider2D:
   m_ObjectHideFlags: 0
