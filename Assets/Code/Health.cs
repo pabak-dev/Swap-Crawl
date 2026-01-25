@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI healthText;
+
     [Header("Stats")]
     [SerializeField] private float maxHealth = 10f;
     private float currentHealth;
@@ -26,6 +29,11 @@ public class Health : MonoBehaviour
         {
             originalMaterial = sr.material;
         }
+    }
+
+    void Update()
+    {
+        healthText.text = currentHealth.ToString("F0") + " / " + maxHealth.ToString("F0");
     }
 
     public void TakeDamage(float amount)
