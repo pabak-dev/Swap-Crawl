@@ -155,4 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71852ebfdd0a794419671f1ba560958a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwapZap
-  duration: 0.15
+  duration: 0.3

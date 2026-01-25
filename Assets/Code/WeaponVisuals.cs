@@ -13,6 +13,8 @@ public class WeaponVisuals : MonoBehaviour
 
     [Header("Ranged Settings")]
     public float orbitRadius = 1.2f;
+    public float recoilDistance = 0.65f;
+
     public Vector2 pivotOffset = new Vector2(0, 0.5f);
 
     [Header("Constraint")]
@@ -78,10 +80,11 @@ public class WeaponVisuals : MonoBehaviour
 
         float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         
-        float activeRadius = orbitRadius - currentRangedRecoil;
-        Vector3 targetPos = orbitCenter + (Vector3)(direction * activeRadius);
+        Vector3 targetPos = orbitCenter + (Vector3)(direction * orbitRadius);
         
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * rotationSmoothness);
+        transform.position -= (Vector3)(direction * currentRangedRecoil);
+
         transform.rotation = Quaternion.Euler(0, 0, baseAngle);
 
         if (Mathf.Abs(baseAngle) > 90)
@@ -125,6 +128,8 @@ public class WeaponVisuals : MonoBehaviour
                 transform.parent.localPosition = new Vector3(targetParentX, parentDefaultPos.y, parentDefaultPos.z);
             }
         }
+
+        sr.sortingOrder = bodyRenderer.sortingOrder + 1;
 
         HandleSmoothAiming(facingDir);
     }
@@ -189,7 +194,7 @@ public class WeaponVisuals : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
-            currentRangedRecoil = Mathf.Lerp(0f, 0.65f, elapsed / duration);
+            currentRangedRecoil = Mathf.Lerp(0f, recoilDistance, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -198,7 +203,7 @@ public class WeaponVisuals : MonoBehaviour
         elapsed = 0f;
         while (elapsed < duration)
         {
-            currentRangedRecoil = Mathf.Lerp(0.65f, 0f, elapsed / duration);
+            currentRangedRecoil = Mathf.Lerp(recoilDistance, 0f, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }

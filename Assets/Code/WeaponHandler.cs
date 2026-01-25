@@ -5,6 +5,7 @@ public class WeaponHandler : MonoBehaviour
     [Header("References")]
     public EntityInventory inventory;
     public WeaponVisuals weaponVisuals;
+    public BulletTracer tracerPrefab;
     public LayerMask enemyLayer;
 
     [Header("Control")]
@@ -118,10 +119,15 @@ public class WeaponHandler : MonoBehaviour
             Instantiate(weapon.attackVFX, transform.position + (Vector3)aimDir * 0.5f, rot);
         }
 
+        Vector3 tracerStart = weaponVisuals.transform.position;
+        Vector3 tracerEnd = transform.position + (Vector3)aimDir * weapon.range;
+
         RaycastHit2D hit = Physics2D.Raycast(transform.position, aimDir, weapon.range, enemyLayer);
 
         if (hit.collider != null)
         {
+            tracerEnd = hit.point;
+
             if (hit.collider.gameObject == gameObject) return;
 
             Health targetHealth = hit.collider.GetComponent<Health>();
@@ -129,6 +135,36 @@ public class WeaponHandler : MonoBehaviour
             {
                 targetHealth.TakeDamage(weapon.damage);
             }
+
+            Vector2 force = aimDir * knockbackForce * 0.35f;
+
+            PlayerController pc = hit.collider.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.ApplyKnockback(force);
+            }
+            else
+            {
+                EnemyAI ai = hit.collider.GetComponent<EnemyAI>();
+                if (ai != null)
+                {
+                    ai.ApplyKnockback(force);
+                }
+                else
+                {
+                    Rigidbody2D targetRb = hit.collider.GetComponent<Rigidbody2D>();
+                    if (targetRb != null)
+                    {
+                        targetRb.AddForce(force, ForceMode2D.Impulse);
+                    }
+                }
+            }
+        }
+
+        if (tracerPrefab != null)
+        {
+            BulletTracer tracer = Instantiate(tracerPrefab, Vector3.zero, Quaternion.identity);
+            tracer.Initialize(tracerStart, tracerEnd);
         }
     }
 

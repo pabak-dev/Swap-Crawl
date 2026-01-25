@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class BodyVisuals : MonoBehaviour
 {
     public Animator animator;
@@ -8,10 +9,12 @@ public class BodyVisuals : MonoBehaviour
 
     private Rigidbody2D parentRb;
     private Vector3 originalScale;
+    private SpriteRenderer sr;
 
     private void Start()
     {
         parentRb = GetComponentInParent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         originalScale = transform.localScale;
         
         originalScale = new Vector3(Mathf.Abs(originalScale.x), Mathf.Abs(originalScale.y), originalScale.z);
@@ -19,6 +22,11 @@ public class BodyVisuals : MonoBehaviour
 
     private void Update()
     {
+        if (sr != null)
+        {
+            sr.sortingOrder = Mathf.RoundToInt(transform.position.y * -100f);
+        }
+
         if (parentRb == null) return;
 
         Vector2 vel = parentRb.linearVelocity;
