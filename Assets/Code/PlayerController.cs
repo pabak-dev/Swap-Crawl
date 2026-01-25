@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
     [Header("Settings")]
     public float maxSwapRange = 10f;
 
+    [Header("Effects")]
+    public GameObject feetDustPrefab;
+    public Transform feetTransform;
+    public float dustSpawnRate = 0.2f;
+    private float dustTimer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,6 +45,21 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        if (movement.sqrMagnitude > 0.01f)
+        {
+            dustTimer -= Time.deltaTime;
+            if (dustTimer <= 0f)
+            {
+                GameObject dust = Instantiate(feetDustPrefab, feetTransform.position, Quaternion.identity);
+                Destroy(dust, 1f);
+                dustTimer = dustSpawnRate;
+            }
+        }
+        else
+        {
+            dustTimer = 0f;
+        }
 
         bool holdingWeaponSwap = Input.GetMouseButton(1);
         bool holdingToolSwap = Input.GetKey(KeyCode.E);

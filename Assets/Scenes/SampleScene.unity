@@ -205,6 +205,9 @@ MonoBehaviour:
   swapZapPrefab: {fileID: 6753983286412739613, guid: fa894a202d48b2041a96d742f9fba600, type: 3}
   swapReticleManager: {fileID: 8935246197019541901}
   maxSwapRange: 10
+  feetDustPrefab: {fileID: 9024370011107915148, guid: 930579a6435420443939ec4d5a7816f2, type: 3}
+  feetTransform: {fileID: 2057268942}
+  dustSpawnRate: 0.2
 --- !u!61 &14877222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4146,7 +4149,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2057268942}
   m_Father: {fileID: 14877219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &941637550
@@ -6432,6 +6436,37 @@ Transform:
   m_Children:
   - {fileID: 597800159}
   m_Father: {fileID: 14877219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2057268941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2057268942}
+  m_Layer: 0
+  m_Name: Feet Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2057268942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057268941}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 941637549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1374073722787005145
 GameObject:
