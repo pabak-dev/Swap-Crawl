@@ -25,6 +25,7 @@ public class EnemyAI : MonoBehaviour
     private EntityInventory inventory;
     private WeaponHandler weaponHandler;
     private WeaponVisuals weaponVisuals;
+    private BodyVisuals bodyVisuals;
     private Transform visualBody;
     private bool isKnockedBack;
 
@@ -33,6 +34,7 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         inventory = GetComponent<EntityInventory>();
         weaponHandler = GetComponent<WeaponHandler>();
+        bodyVisuals = GetComponentInChildren<BodyVisuals>();
         
         weaponVisuals = GetComponentInChildren<WeaponVisuals>();
         if (weaponVisuals != null)
@@ -69,6 +71,8 @@ public class EnemyAI : MonoBehaviour
     public void ApplyKnockback(Vector2 force)
     {
         isKnockedBack = true;
+        if (bodyVisuals != null) bodyVisuals.isKnockedBack = true;
+        
         rb.AddForce(force, ForceMode2D.Impulse);
         
         CancelInvoke(nameof(StopKnockback));
@@ -77,7 +81,9 @@ public class EnemyAI : MonoBehaviour
 
     private void StopKnockback()
     {
+        rb.linearVelocity = Vector2.zero;
         isKnockedBack = false;
+        if (bodyVisuals != null) bodyVisuals.isKnockedBack = false;
     }
 
     private void HandleCombat(float distance)

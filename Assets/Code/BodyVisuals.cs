@@ -7,6 +7,8 @@ public class BodyVisuals : MonoBehaviour
     public float squashAmount = 0.1f;
     public float squashSpeed = 15f;
 
+    public bool isKnockedBack;
+
     private Rigidbody2D parentRb;
     private Vector3 originalScale;
     private SpriteRenderer sr;
@@ -38,7 +40,8 @@ public class BodyVisuals : MonoBehaviour
         }
 
         float direction = Mathf.Sign(transform.localScale.x);
-        if (Mathf.Abs(vel.x) > 0.01f)
+        
+        if (Mathf.Abs(vel.x) > 0.01f && !isKnockedBack)
         {
             direction = Mathf.Sign(vel.x);
         }

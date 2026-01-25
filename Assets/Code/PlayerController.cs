@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private EntityInventory myInventory;
+    private BodyVisuals bodyVisuals;
     private Vector2 movement;
     private float lastSwapTime;
     private bool isKnockedBack;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         myInventory = GetComponent<EntityInventory>();
+        bodyVisuals = GetComponentInChildren<BodyVisuals>();
         lastSwapTime = -swapCooldown; 
     }
 
@@ -75,15 +77,19 @@ public class PlayerController : MonoBehaviour
     public void ApplyKnockback(Vector2 force)
     {
         isKnockedBack = true;
+        if (bodyVisuals != null) bodyVisuals.isKnockedBack = true;
+        
         rb.AddForce(force, ForceMode2D.Impulse);
         
         CancelInvoke(nameof(StopKnockback));
-        Invoke(nameof(StopKnockback), 0.2f);
+        Invoke(nameof(StopKnockback), 0.3f);
     }
 
     private void StopKnockback()
     {
+        rb.linearVelocity = Vector2.zero;
         isKnockedBack = false;
+        if (bodyVisuals != null) bodyVisuals.isKnockedBack = false;
     }
 
     private void HandleTargeting()

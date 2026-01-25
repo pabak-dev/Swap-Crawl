@@ -77,7 +77,11 @@ public class Health : MonoBehaviour
     private void Die()
     {
         // poof particle
-        GetComponent<EnemyAI>().enabled = false;
+        if (TryGetComponent<EnemyAI>(out var enemyAI))
+        {
+            enemyAI.enabled = false;
+        }
+        
         Destroy(gameObject, 0.095f);
     }
 }
