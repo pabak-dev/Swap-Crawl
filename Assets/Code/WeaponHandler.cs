@@ -38,11 +38,11 @@ public class WeaponHandler : MonoBehaviour
     {
         if (usePlayerInput && Input.GetMouseButtonDown(0))
         {
-            AttemptAttack();
+            AttemptAttack(0f);
         }
     }
 
-    public void AttemptAttack()
+    public void AttemptAttack(float spreadAngle)
     {
         WeaponData weapon = inventory.currentWeapon;
         if (weapon == null) return;
@@ -53,7 +53,7 @@ public class WeaponHandler : MonoBehaviour
 
         if (weapon.isRanged)
         {
-            FireRifle(weapon);
+            FireRifle(weapon, spreadAngle);
         }
         else
         {
@@ -114,11 +114,17 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    private void FireRifle(WeaponData weapon)
+    private void FireRifle(WeaponData weapon, float spreadAngle)
     {
         weaponVisuals.TriggerRecoil();
 
         Vector2 aimDir = (AimPosition - transform.position).normalized;
+
+        if (spreadAngle > 0)
+        {
+            float randomAngle = Random.Range(-spreadAngle, spreadAngle);
+            aimDir = Quaternion.Euler(0, 0, randomAngle) * aimDir;
+        }
 
         Vector3 muzzlePos = weaponVisuals.transform.position + (weaponVisuals.transform.right * weapon.muzzleOffset.x) + (weaponVisuals.transform.up * weapon.muzzleOffset.y);
 

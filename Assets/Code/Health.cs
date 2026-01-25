@@ -33,7 +33,9 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        healthText.text = currentHealth.ToString("F0") + " / " + maxHealth.ToString("F0");
+        if (healthText != null){
+            healthText.text = currentHealth.ToString("F0") + " / " + maxHealth.ToString("F0");
+        }
     }
 
     public void TakeDamage(float amount)
@@ -75,6 +77,7 @@ public class Health : MonoBehaviour
     private void Die()
     {
         // poof particle
-        Destroy(gameObject);
+        GetComponent<EnemyAI>().enabled = false;
+        Destroy(gameObject, 0.095f);
     }
 }

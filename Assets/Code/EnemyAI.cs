@@ -14,6 +14,13 @@ public class EnemyAI : MonoBehaviour
     public float stopDistanceRanged = 5f;
     public float stopDistanceMelee = 1f;
 
+    [Header("Combat Stats")]
+    public float aimSpread = 15f;
+    public float minFireDelay = 0.3f;
+    public float maxFireDelay = 0.8f;
+
+    private float currentFireTimer;
+
     private Rigidbody2D rb;
     private EntityInventory inventory;
     private WeaponHandler weaponHandler;
@@ -39,6 +46,8 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        currentFireTimer = Random.Range(minFireDelay, maxFireDelay);
     }
 
     private void Update()
@@ -89,6 +98,8 @@ public class EnemyAI : MonoBehaviour
         {
             float toolSpeedMult = (inventory.currentTool != null) ? inventory.currentTool.moveSpeedMultiplier : 1f;
             rb.linearVelocity = direction * moveSpeed * toolSpeedMult;
+            
+            currentFireTimer = Random.Range(minFireDelay, maxFireDelay);
         }
         else
         {
@@ -96,7 +107,13 @@ public class EnemyAI : MonoBehaviour
             
             if (weapon != null && distance <= weapon.range)
             {
-                weaponHandler.AttemptAttack();
+                currentFireTimer -= Time.deltaTime;
+
+                if (currentFireTimer <= 0)
+                {
+                    weaponHandler.AttemptAttack(aimSpread);
+                    currentFireTimer = Random.Range(minFireDelay, maxFireDelay);
+                }
             }
         }
 
