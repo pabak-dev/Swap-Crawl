@@ -81,6 +81,10 @@ public class Health : MonoBehaviour
         {
             enemyAI.enabled = false;
         }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
         
         Destroy(gameObject, 0.095f);
     }

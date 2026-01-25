@@ -82,8 +82,9 @@ public class WeaponVisuals : MonoBehaviour
         
         Vector3 targetPos = orbitCenter + (Vector3)(direction * orbitRadius);
         
-        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * rotationSmoothness);
-        transform.position -= (Vector3)(direction * currentRangedRecoil);
+        Vector3 currentOrbitPos = transform.position + (Vector3)(direction * currentRangedRecoil);
+        Vector3 smoothedOrbitPos = Vector3.Lerp(currentOrbitPos, targetPos, Time.deltaTime * rotationSmoothness);
+        transform.position = smoothedOrbitPos - (Vector3)(direction * currentRangedRecoil);
 
         transform.rotation = Quaternion.Euler(0, 0, baseAngle);
 
@@ -98,14 +99,7 @@ public class WeaponVisuals : MonoBehaviour
 
         if (bodyRenderer != null)
         {
-            if (direction.y > 0.1f) 
-            {
-                sr.sortingOrder = bodyRenderer.sortingOrder - 1;
-            }
-            else 
-            {
-                sr.sortingOrder = bodyRenderer.sortingOrder + 1;
-            }
+            sr.sortingOrder = bodyRenderer.sortingOrder + 10;
         }
     }
 
@@ -129,7 +123,7 @@ public class WeaponVisuals : MonoBehaviour
             }
         }
 
-        sr.sortingOrder = bodyRenderer.sortingOrder + 1;
+        sr.sortingOrder = bodyRenderer.sortingOrder + 10;
 
         HandleSmoothAiming(facingDir);
     }
