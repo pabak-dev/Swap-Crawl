@@ -36,6 +36,11 @@ public class EnemyAI : MonoBehaviour
         weaponHandler.usePlayerInput = false;
     }
 
+    void Start()
+    {
+        playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     private void Update()
     {
         if (isKnockedBack) return;

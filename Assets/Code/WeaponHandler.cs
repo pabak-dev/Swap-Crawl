@@ -26,6 +26,14 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        if (!usePlayerInput)
+        {
+            targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+    }
+
     private void Update()
     {
         if (usePlayerInput && Input.GetMouseButtonDown(0))
