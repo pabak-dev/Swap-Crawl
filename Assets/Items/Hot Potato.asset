@@ -15,4 +15,4 @@ MonoBehaviour:
   toolName: 
   moveSpeedMultiplier: 1
   isCursed: 0
-  visualIndicator: {fileID: 0}
+  visualIndicator: {fileID: 21300000, guid: f1aeb1cdaf5c0594aa485d5cb98ab431, type: 3}

@@ -12,6 +12,7 @@ public class BodyVisuals : MonoBehaviour
     private Rigidbody2D parentRb;
     private Vector3 originalScale;
     private SpriteRenderer sr;
+    public SpriteRenderer toolOverlay;
 
     private void Start()
     {
@@ -27,6 +28,11 @@ public class BodyVisuals : MonoBehaviour
         if (sr != null)
         {
             sr.sortingOrder = Mathf.RoundToInt(transform.position.y * -100f);
+            
+            if (toolOverlay != null)
+            {
+                toolOverlay.sortingOrder = sr.sortingOrder + 1;
+            }
         }
 
         if (parentRb == null) return;

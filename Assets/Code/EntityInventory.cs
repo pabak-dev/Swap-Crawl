@@ -7,6 +7,7 @@ public class EntityInventory : MonoBehaviour
     public WeaponData currentWeapon;
     public ToolData currentTool;
     public SpriteRenderer heldItemRenderer;
+    public BodyVisuals bodyVisuals;
 
     private void Start()
     {
@@ -42,6 +43,18 @@ public class EntityInventory : MonoBehaviour
             if (visuals != null)
             {
                 visuals.isRanged = currentWeapon.isRanged;
+            }
+        }
+
+        if (bodyVisuals != null && bodyVisuals.toolOverlay != null)
+        {print("xxx");
+            if (currentTool != null)
+            {
+                bodyVisuals.toolOverlay.sprite = currentTool.visualIndicator;
+            }
+            else
+            {
+                bodyVisuals.toolOverlay.sprite = null;
             }
         }
     }
