@@ -112,14 +112,16 @@ public class WeaponHandler : MonoBehaviour
 
         Vector2 aimDir = (AimPosition - transform.position).normalized;
 
+        Vector3 muzzlePos = weaponVisuals.transform.position + (weaponVisuals.transform.right * weapon.muzzleOffset.x) + (weaponVisuals.transform.up * weapon.muzzleOffset.y);
+
         if (weapon.attackVFX != null)
         {
             float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
             Quaternion rot = Quaternion.Euler(0, 0, angle);
-            Instantiate(weapon.attackVFX, transform.position + (Vector3)aimDir * 0.5f, rot);
+            Instantiate(weapon.attackVFX, muzzlePos, rot);
         }
 
-        Vector3 tracerStart = weaponVisuals.transform.position;
+        Vector3 tracerStart = muzzlePos;
         Vector3 tracerEnd = transform.position + (Vector3)aimDir * weapon.range;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, aimDir, weapon.range, enemyLayer);

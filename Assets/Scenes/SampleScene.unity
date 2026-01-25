@@ -294,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponHandler
   inventory: {fileID: 14877223}
   weaponVisuals: {fileID: 597800161}
+  tracerPrefab: {fileID: 3959529240496511036, guid: e9e7c974347cfce448d91159961b992e, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -3595,6 +3596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponHandler
   inventory: {fileID: 321432346}
   weaponVisuals: {fileID: 411247113}
+  tracerPrefab: {fileID: 3959529240496511036, guid: e9e7c974347cfce448d91159961b992e, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128

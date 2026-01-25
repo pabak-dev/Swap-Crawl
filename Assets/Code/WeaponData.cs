@@ -12,4 +12,5 @@ public class WeaponData : ScriptableObject
     [Header("Visuals")]
     public GameObject attackVFX;
     public bool isRanged;
+    public Vector2 muzzleOffset;
 }
