@@ -244,6 +244,7 @@ MonoBehaviour:
   usePlayerInput: 0
   targetTransform: {fileID: 0}
   knockbackForce: 8
+  reloadFill: {fileID: 0}
 --- !u!114 &8953146542816060721
 MonoBehaviour:
   m_ObjectHideFlags: 0
