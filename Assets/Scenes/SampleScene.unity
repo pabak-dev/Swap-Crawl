@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 14877224}
   - component: {fileID: 14877225}
   - component: {fileID: 14877226}
+  - component: {fileID: 14877227}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -209,6 +210,7 @@ MonoBehaviour:
   feetDustPrefab: {fileID: 9024370011107915148, guid: 930579a6435420443939ec4d5a7816f2, type: 3}
   feetTransform: {fileID: 2057268942}
   dustSpawnRate: 0.25
+  aimLine: {fileID: 14877227}
 --- !u!61 &14877222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -287,6 +289,7 @@ MonoBehaviour:
   maxHealth: 50
   flashMaterial: {fileID: 2100000, guid: 1c731a44c742b2c4f83d1b264fc4697e, type: 2}
   flashDuration: 0.1
+  poof_VFX: {fileID: 0}
 --- !u!114 &14877225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +326,116 @@ MonoBehaviour:
   explodeTime: 5
   explosionDamage: 30
   timerText: {fileID: 0}
+--- !u!120 &14877227
+LineRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14877217}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 1986196941
+  m_SortingLayer: 3
+  m_SortingOrder: -32768
+  m_MaskInteraction: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 0.05
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 0.61960787}
+      key1: {r: 1, g: 1, b: 1, a: 0.61960787}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 1
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    textureScale: {x: 1, y: 1}
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0
+  m_ApplyActiveColorSpace: 1
 --- !u!1 &46208384
 GameObject:
   m_ObjectHideFlags: 0
@@ -4096,7 +4209,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 251260c12b865524aba82ddc7147f650, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2617bfcff868eeb4abbab3f5386a0544, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -4770,6 +4883,7 @@ MonoBehaviour:
   squashSpeed: 18
   isKnockedBack: 0
   toolOverlay: {fileID: 2006309252}
+  flashMaterial: {fileID: 2100000, guid: ba4ee29175bdd29408bcb5627027e666, type: 2}
 --- !u!1 &1052860411
 GameObject:
   m_ObjectHideFlags: 0
@@ -7631,18 +7745,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_duck
       objectReference: {fileID: 0}
-    - target: {fileID: 2505994215823311453, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
-      propertyPath: maxFireDelay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2505994215823311453, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
-      propertyPath: minFireDelay
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4029581216197888943, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
-      propertyPath: currentTool
-      value: 
-      objectReference: {fileID: 11400000, guid: fadbd719383ccdd4eab56003f40e77d4, type: 2}
     - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.52
@@ -7732,10 +7834,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_sword
       objectReference: {fileID: 0}
-    - target: {fileID: 910583140852846318, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3948495437908076589, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.44
@@ -7792,10 +7890,6 @@ PrefabInstance:
     - target: {fileID: 4905109130807867285, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
       propertyPath: m_Name
       value: Skeleton_rifle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905109130807867285, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5937609694021914176, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7855,9 +7949,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwapReticle
   reticlePrefab: {fileID: 7139721152095763612, guid: 302e7d368f624344dbbb0708d90f0116, type: 3}
-  selectedColor: {r: 0.23082057, g: 0.8584906, b: 0.23082057, a: 0.78431374}
-  cooldownColor: {r: 0.8962264, g: 0.15641688, b: 0.15641688, a: 0.7058824}
-  availableColor: {r: 1, g: 1, b: 1, a: 0.627451}
+  selectedColor: {r: 0.23082057, g: 0.8584906, b: 0.23082057, a: 0.92156863}
+  cooldownColor: {r: 0.8962264, g: 0.15641688, b: 0.15641688, a: 0.92156863}
+  availableColor: {r: 1, g: 1, b: 1, a: 0.5882353}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

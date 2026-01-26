@@ -20,6 +20,8 @@ public class Health : MonoBehaviour
     private Coroutine flashRoutine;
     private EntityInventory inventory;
 
+    [SerializeField] private GameObject poof_VFX;
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -89,7 +91,8 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        // poof particle
+        if (poof_VFX != null) Destroy(Instantiate(poof_VFX, transform.position, Quaternion.identity), 2f);
+        
         if (TryGetComponent<EnemyAI>(out var enemyAI))
         {
             enemyAI.enabled = false;

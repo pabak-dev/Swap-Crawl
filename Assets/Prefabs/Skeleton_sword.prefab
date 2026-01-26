@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityInventory
   currentWeapon: {fileID: 11400000, guid: 0acfb2ec6b507ed40a10db4d14acd6b3, type: 2}
-  currentTool: {fileID: 11400000, guid: fadbd719383ccdd4eab56003f40e77d4, type: 2}
+  currentTool: {fileID: 11400000, guid: a88f56b380fb9a54eb1f1b207736c5fb, type: 2}
   heldItemRenderer: {fileID: 6098283687829470887}
   bodyVisuals: {fileID: 8145308348165521165}
 --- !u!114 &1651885821977120123
@@ -145,6 +145,7 @@ MonoBehaviour:
   maxHealth: 10
   flashMaterial: {fileID: 0}
   flashDuration: 0.1
+  poof_VFX: {fileID: 7246003833052837797, guid: 12c4539101e95a94db56196af6dec4bf, type: 3}
 --- !u!114 &5224798488588182595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +339,7 @@ MonoBehaviour:
   squashSpeed: 18
   isKnockedBack: 0
   toolOverlay: {fileID: 6430377359738338863}
+  flashMaterial: {fileID: 2100000, guid: ba4ee29175bdd29408bcb5627027e666, type: 2}
 --- !u!1 &2690271754879254269
 GameObject:
   m_ObjectHideFlags: 0

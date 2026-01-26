@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class BodyVisuals : MonoBehaviour
@@ -14,6 +15,9 @@ public class BodyVisuals : MonoBehaviour
     private SpriteRenderer sr;
     public SpriteRenderer toolOverlay;
 
+    private Material originalMaterial;
+    public Material flashMaterial;
+
     private void Start()
     {
         parentRb = GetComponentInParent<Rigidbody2D>();
@@ -21,6 +25,11 @@ public class BodyVisuals : MonoBehaviour
         originalScale = transform.localScale;
         
         originalScale = new Vector3(Mathf.Abs(originalScale.x), Mathf.Abs(originalScale.y), originalScale.z);
+
+        if (sr != null)
+        {
+            originalMaterial = sr.material;
+        }
     }
 
     private void Update()
@@ -72,5 +81,17 @@ public class BodyVisuals : MonoBehaviour
         float finalY = originalScale.y + squashY;
 
         transform.localScale = new Vector3(finalX, finalY, originalScale.z);
+    }
+
+    public void TriggerSwapFlash()
+    {
+        StartCoroutine(SwapFlashRoutine());
+    }
+
+    private IEnumerator SwapFlashRoutine()
+    {
+        sr.material = flashMaterial;
+        yield return new WaitForSeconds(0.15f);
+        sr.material = originalMaterial;
     }
 }

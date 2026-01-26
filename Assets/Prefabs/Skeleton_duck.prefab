@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityInventory
   currentWeapon: {fileID: 11400000, guid: dc207650029a206458a2ba177a48b710, type: 2}
-  currentTool: {fileID: 11400000, guid: 1465b7e0fb12e744fb93ee0d3fca061b, type: 2}
+  currentTool: {fileID: 11400000, guid: fadbd719383ccdd4eab56003f40e77d4, type: 2}
   heldItemRenderer: {fileID: 2561233115523194060}
   bodyVisuals: {fileID: 7075538434091800856}
 --- !u!114 &4095460209357451666
@@ -145,6 +145,7 @@ MonoBehaviour:
   maxHealth: 10
   flashMaterial: {fileID: 0}
   flashDuration: 0.1
+  poof_VFX: {fileID: 7246003833052837797, guid: 12c4539101e95a94db56196af6dec4bf, type: 3}
 --- !u!114 &8244628342662181530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,8 +185,8 @@ MonoBehaviour:
   stopDistanceRanged: 6
   stopDistanceMelee: 0.65
   aimSpread: 7.5
-  minFireDelay: 0.3
-  maxFireDelay: 0.8
+  minFireDelay: 0.4
+  maxFireDelay: 1
   feetDustPrefab: {fileID: 9024370011107915148, guid: 930579a6435420443939ec4d5a7816f2, type: 3}
   feetTransform: {fileID: 5545808264534972708}
   dustSpawnRate: 0.35
@@ -429,6 +430,7 @@ MonoBehaviour:
   squashSpeed: 18
   isKnockedBack: 0
   toolOverlay: {fileID: 3839080115546618087}
+  flashMaterial: {fileID: 2100000, guid: ba4ee29175bdd29408bcb5627027e666, type: 2}
 --- !u!1 &3638468984791797745
 GameObject:
   m_ObjectHideFlags: 0

@@ -145,6 +145,7 @@ MonoBehaviour:
   maxHealth: 10
   flashMaterial: {fileID: 0}
   flashDuration: 0.1
+  poof_VFX: {fileID: 7246003833052837797, guid: 12c4539101e95a94db56196af6dec4bf, type: 3}
 --- !u!114 &8858916298787635492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,3 +609,4 @@ MonoBehaviour:
   squashSpeed: 18
   isKnockedBack: 0
   toolOverlay: {fileID: 3096782295862686358}
+  flashMaterial: {fileID: 2100000, guid: ba4ee29175bdd29408bcb5627027e666, type: 2}

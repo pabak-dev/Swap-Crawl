@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public float dustSpawnRate = 0.2f;
     private float dustTimer;
 
+    public LineRenderer aimLine;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -115,6 +117,18 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTargeting()
     {
+        if (aimLine != null)
+        {
+            aimLine.enabled = true;
+            Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosWorld.z = 0f;
+            
+            Vector3 dir = (mousePosWorld - transform.position).normalized;
+            
+            aimLine.SetPosition(0, transform.position);
+            aimLine.SetPosition(1, transform.position + dir * maxSwapRange);
+        }
+
         if (swapReticleManager == null) return;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, maxSwapRange, targetLayer);
@@ -162,14 +176,12 @@ public class PlayerController : MonoBehaviour
                 if (targetPotato != null) targetPotato.Arm();
             }
 
-            if (swapZapPrefab != null)
-            {
-                SwapZap zap = Instantiate(swapZapPrefab, transform.position, Quaternion.identity);
-                zap.Initialize(transform.position, currentHoverTarget.transform.position);
-            }
+            if (bodyVisuals != null) bodyVisuals.TriggerSwapFlash();
+            if (currentHoverTarget.bodyVisuals != null) currentHoverTarget.bodyVisuals.TriggerSwapFlash();
         }
         
         if (swapReticleManager != null) swapReticleManager.HideAll();
+        if (aimLine != null) aimLine.enabled = false;
         currentHoverTarget = null;
     }
 }

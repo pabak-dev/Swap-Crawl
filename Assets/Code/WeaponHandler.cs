@@ -106,7 +106,7 @@ public class WeaponHandler : MonoBehaviour
         if (projScript != null)
         {
             projScript.damage = weapon.damage;
-            projScript.knockbackForce = knockbackForce * 0.2f; 
+            projScript.knockbackForce = 0; 
             projScript.speed = weapon.projectileSpeed;
             projScript.owner = gameObject;
             projScript.hitLayers = enemyLayer;
@@ -211,7 +211,7 @@ public class WeaponHandler : MonoBehaviour
                 CheckVampireHeal();
             }
 
-            Vector2 force = aimDir * knockbackForce * 0.35f;
+            Vector2 force = aimDir * knockbackForce * 0f;
 
             PlayerController pc = hit.collider.GetComponent<PlayerController>();
             if (pc != null)
