@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using System;
 
 public class Health : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Health : MonoBehaviour
     private EntityInventory inventory;
 
     [SerializeField] private GameObject poof_VFX;
+    [SerializeField] private GameObject gameOverPanel;
 
     private void Awake()
     {
@@ -98,6 +100,8 @@ public class Health : MonoBehaviour
     private void Die()
     {
         if (poof_VFX != null) Destroy(Instantiate(poof_VFX, transform.position, Quaternion.identity), 2f);
+
+        if (GameManager.Instance != null) GameManager.Instance.OnEnemyKilled();
         
         if (TryGetComponent<EnemyAI>(out var enemyAI))
         {
@@ -105,7 +109,8 @@ public class Health : MonoBehaviour
         }
         else
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 0f;
+            gameOverPanel.SetActive(true);
         }
         
         Destroy(gameObject, 0.095f);

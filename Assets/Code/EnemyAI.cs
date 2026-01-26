@@ -16,8 +16,6 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Combat Stats")]
     public float aimSpread = 15f;
-    public float minFireDelay = 0.3f;
-    public float maxFireDelay = 0.8f;
 
     [Header("Effects")]
     public GameObject feetDustPrefab;
@@ -55,7 +53,7 @@ public class EnemyAI : MonoBehaviour
     {
         playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
         
-        currentFireTimer = Random.Range(minFireDelay, maxFireDelay);
+        currentFireTimer = Random.Range(0.5f, 1f);
     }
 
     private void Update()
@@ -120,6 +118,9 @@ public class EnemyAI : MonoBehaviour
         }
 
         Vector2 direction = (playerTarget.position - transform.position).normalized;
+
+        float minFireDelay = isRanged ? 0.25f : 0.1f;
+        float maxFireDelay = isRanged ? 0.75f : 0.3f;
 
         if (distance > requiredDistance)
         {

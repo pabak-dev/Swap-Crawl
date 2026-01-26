@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
     private int waveNumber = 1;
     [SerializeField] private ToolData[] allTools;
 
+    private int activeEnemies = 0;
+    private bool waitingForNextWave = false;
+    private float waveTimer = 0f;
+
     private void Awake()
     {
         Instance = this;
@@ -39,9 +43,23 @@ public class GameManager : MonoBehaviour
 
         if (isWavePhase)
         {
-            if (Input.GetKeyDown(startWaveKey))
+            if (waitingForNextWave)
             {
-                SpawnWave();
+                waveTimer -= Time.deltaTime;
+                
+                UpdateWaveUI($"Wave {waveNumber - 1} survived. Press '{startWaveKey}' for next! ({Mathf.CeilToInt(waveTimer)})");
+
+                if (Input.GetKeyDown(startWaveKey) || waveTimer <= 0f)
+                {
+                    SpawnWave();
+                }
+            }
+            else if (activeEnemies == 0 && waveNumber == 1) 
+            {
+                if (Input.GetKeyDown(startWaveKey))
+                {
+                    SpawnWave();
+                }
             }
         }
     }
@@ -58,10 +76,32 @@ public class GameManager : MonoBehaviour
         UpdateWaveUI($"Ready! Press '{startWaveKey}' for Wave " + waveNumber);
     }
 
+    public void OnEnemyKilled()
+    {
+        if (!isWavePhase) return;
+
+        activeEnemies--;
+        
+        if (activeEnemies <= 0)
+        {
+            activeEnemies = 0; 
+            StartWaveCountdown();
+        }
+    }
+
+    private void StartWaveCountdown()
+    {
+        waitingForNextWave = true;
+        waveTimer = 10f;
+    }
+
     private void SpawnWave()
     {
+        waitingForNextWave = false;
         int count = Mathf.CeilToInt(waveNumber * 1.5f) + Random.Range(1, 3);
         
+        activeEnemies = count; 
+
         for (int i = 0; i < count; i++)
         {
             Transform sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
@@ -72,7 +112,7 @@ public class GameManager : MonoBehaviour
         }
 
         waveNumber++;
-        UpdateWaveUI("Wave " + (waveNumber - 1) + $" Spawned! Press '{startWaveKey}' for Next.");
+        UpdateWaveUI($"Wave {waveNumber - 1} Started! Defeat all enemies.");
     }
 
     private void UpdateWaveUI(string msg)
