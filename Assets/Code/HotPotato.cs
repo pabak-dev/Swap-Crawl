@@ -7,7 +7,7 @@ public class HotPotato : MonoBehaviour
 {
     public float explodeTime = 5f;
     public float explosionDamage = 999f;
-    public TextMeshPro timerText; 
+    public TextMeshProUGUI timerText; 
 
     private EntityInventory inventory;
     private Health health;
