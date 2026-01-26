@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponHandler : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class WeaponHandler : MonoBehaviour
 
     private float nextAttackTime;
     private Health myHealth;
+
+    public Image reloadFill;
 
     private Vector3 AimPosition
     {
@@ -38,6 +41,21 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
+        if (reloadFill != null)
+        {
+            float amount = 1 - (nextAttackTime - Time.time) * (inventory.currentWeapon != null ? inventory.currentWeapon.fireRate : 1f);
+            reloadFill.fillAmount = Mathf.Clamp01(amount);
+
+            if (reloadFill.fillAmount > 0.99f)
+            {
+                reloadFill.enabled = false;
+            }
+            else
+            {
+                reloadFill.enabled = true;
+            }
+        }
+
         if (usePlayerInput && Input.GetMouseButtonDown(0))
         {
             AttemptAttack(0f);
@@ -174,6 +192,8 @@ public class WeaponHandler : MonoBehaviour
 
     private void FireRifle(WeaponData weapon, float spreadAngle)
     {
+        if (Time.timeScale == 0f) return;
+
         weaponVisuals.TriggerRecoil();
 
         Vector2 aimDir = (AimPosition - transform.position).normalized;

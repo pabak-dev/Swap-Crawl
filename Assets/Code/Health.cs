@@ -5,6 +5,7 @@ using TMPro;
 public class Health : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private RectTransform healthBarFill;
 
     [Header("Stats")]
     [SerializeField] private float maxHealth = 10f;
@@ -38,6 +39,11 @@ public class Health : MonoBehaviour
     {
         if (healthText != null){
             healthText.text = currentHealth.ToString("F0") + " / " + maxHealth.ToString("F0");
+        }
+
+        if (healthBarFill != null)
+        {
+            healthBarFill.localScale = new Vector3(Mathf.Max(currentHealth / maxHealth, 0f), 1f, 1f);
         }
     }
 

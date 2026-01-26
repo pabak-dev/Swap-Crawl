@@ -74,6 +74,7 @@ public class WeaponVisuals : MonoBehaviour
     private void HandleRangedOrbit()
     {
         if (bodyTransform == null) return;
+        if (Time.timeScale == 0f) return;
 
         Vector3 orbitCenter = bodyTransform.position + (Vector3)pivotOffset;
         Vector2 direction = (AimPosition - orbitCenter).normalized;

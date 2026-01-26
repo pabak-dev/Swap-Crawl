@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     public LineRenderer aimLine;
 
+    public RectTransform swapTimerFill;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -87,6 +89,8 @@ public class PlayerController : MonoBehaviour
         {
             ExecuteSwap(EntityInventory.SwapType.Tool);
         }
+
+        swapTimerFill.localScale = new Vector3(Mathf.Clamp01((Time.time - lastSwapTime) / swapCooldown), 1f, 1f);
     }
 
     private void FixedUpdate()
@@ -117,6 +121,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTargeting()
     {
+        if (Time.timeScale == 0f) return;
+
         if (aimLine != null)
         {
             aimLine.enabled = true;
@@ -124,7 +130,7 @@ public class PlayerController : MonoBehaviour
             mousePosWorld.z = 0f;
             
             Vector3 dir = (mousePosWorld - transform.position).normalized;
-            
+
             aimLine.SetPosition(0, transform.position);
             aimLine.SetPosition(1, transform.position + dir * maxSwapRange);
         }
