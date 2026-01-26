@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e26b9096376964cb11a9a43284d790, type: 3}
   m_Name: Rubber Duck
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: 
-  damage: 0
-  range: 0
-  fireRate: 0
-  sprite: {fileID: 0}
+  weaponName: Rubber Duck
+  damage: 2
+  range: 10
+  fireRate: 1.5
+  sprite: {fileID: 21300000, guid: 7b925ed93ff9d2c45b961c66f2e65561, type: 3}
+  attackVFX: {fileID: 0}
+  isRanged: 1
+  muzzleOffset: {x: 0, y: 0}
+  projectilePrefab: {fileID: 7045433306801576682, guid: 50ca20376f4b15b4b85a3328f78c965e, type: 3}
+  projectileSpeed: 7

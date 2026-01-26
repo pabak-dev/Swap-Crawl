@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e26b9096376964cb11a9a43284d790, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: 
+  weaponName: Sword
   damage: 4
   range: 0.725
   fireRate: 1.65
   sprite: {fileID: 21300000, guid: 2bd1557b0f5e72e43a8d4703400e6c6d, type: 3}
   attackVFX: {fileID: 0}
   isRanged: 0
+  muzzleOffset: {x: 0, y: 0}
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 10

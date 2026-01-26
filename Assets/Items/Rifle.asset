@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67e26b9096376964cb11a9a43284d790, type: 3}
-  m_Name: Sniper Rifle
+  m_Name: Rifle
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: 
+  weaponName: Rifle
   damage: 10
   range: 10
   fireRate: 0.4
@@ -20,3 +20,5 @@ MonoBehaviour:
   attackVFX: {fileID: 0}
   isRanged: 1
   muzzleOffset: {x: 1.375, y: 0.1}
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 10

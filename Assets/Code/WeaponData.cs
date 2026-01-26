@@ -13,4 +13,8 @@ public class WeaponData : ScriptableObject
     public GameObject attackVFX;
     public bool isRanged;
     public Vector2 muzzleOffset;
+
+    [Header("Projectile Settings")]
+    public GameObject projectilePrefab;
+    public float projectileSpeed = 10f;
 }

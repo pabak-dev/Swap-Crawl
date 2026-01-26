@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1651885821977120123}
   - component: {fileID: 5224798488588182595}
   - component: {fileID: 8953146542816060721}
+  - component: {fileID: 8744235990427917250}
   m_Layer: 6
   m_Name: Skeleton_sword
   m_TagString: Untagged
@@ -182,12 +183,27 @@ MonoBehaviour:
   moveSpeed: 2
   stopDistanceRanged: 6
   stopDistanceMelee: 0.65
-  aimSpread: 0
+  aimSpread: 7.5
   minFireDelay: 0.1
   maxFireDelay: 0.4
   feetDustPrefab: {fileID: 9024370011107915148, guid: 930579a6435420443939ec4d5a7816f2, type: 3}
   feetTransform: {fileID: 132973560326311835}
   dustSpawnRate: 0.35
+--- !u!114 &8744235990427917250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910583140852846318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73fb268832cd0654ba9f288aeb7eb46d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HotPotato
+  explodeTime: 5
+  explosionDamage: 30
+  timerText: {fileID: 0}
 --- !u!1 &1404617887192691542
 GameObject:
   m_ObjectHideFlags: 0

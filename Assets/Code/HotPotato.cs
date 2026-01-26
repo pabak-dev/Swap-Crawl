@@ -1,0 +1,86 @@
+using UnityEngine;
+using TMPro;
+
+[RequireComponent(typeof(EntityInventory))]
+[RequireComponent(typeof(Health))]
+public class HotPotato : MonoBehaviour
+{
+    public float explodeTime = 5f;
+    public float explosionDamage = 999f;
+    public TextMeshPro timerText; 
+
+    private EntityInventory inventory;
+    private Health health;
+    private float timer;
+    private bool isArmed;
+    private bool hasPotato;
+
+    private void Awake()
+    {
+        inventory = GetComponent<EntityInventory>();
+        health = GetComponent<Health>();
+    }
+
+    public void Arm()
+    {
+        isArmed = true;
+    }
+
+    private void Update()
+    {
+        if (inventory == null || inventory.currentTool == null) 
+        {
+            ResetPotato();
+            return;
+        }
+
+        if (inventory.currentTool.toolName == "Hot Potato")
+        {
+            if (!isArmed)
+            {
+                if (timerText != null) timerText.gameObject.SetActive(false);
+                return;
+            }
+
+            if (!hasPotato)
+            {
+                hasPotato = true;
+                timer = explodeTime;
+            }
+
+            timer -= Time.deltaTime;
+
+            if (timerText != null)
+            {
+                timerText.text = Mathf.Ceil(timer).ToString();
+                timerText.gameObject.SetActive(true);
+            }
+
+            if (timer <= 0)
+            {
+                Explode();
+            }
+        }
+        else
+        {
+            ResetPotato();
+        }
+    }
+
+    private void ResetPotato()
+    {
+        hasPotato = false;
+        isArmed = false;
+        timer = explodeTime;
+        if (timerText != null) timerText.gameObject.SetActive(false);
+    }
+
+    private void Explode()
+    {
+        if (health != null)
+        {
+            health.TakeDamage(explosionDamage);
+        }
+        ResetPotato();
+    }
+}

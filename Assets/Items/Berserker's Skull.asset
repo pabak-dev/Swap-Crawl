@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71dd2e276b3ad23469c722a128dce00d, type: 3}
   m_Name: Berserker's Skull
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
-  toolName: 
+  toolName: Berserker's Skull
   moveSpeedMultiplier: 1
-  isCursed: 0
+  isCursed: 1
   visualIndicator: {fileID: 21300000, guid: d2a25342f9bcd824a912a7afc1b49371, type: 3}

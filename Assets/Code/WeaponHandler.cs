@@ -16,6 +16,7 @@ public class WeaponHandler : MonoBehaviour
     public float knockbackForce = 15f;
 
     private float nextAttackTime;
+    private Health myHealth;
 
     private Vector3 AimPosition
     {
@@ -28,6 +29,7 @@ public class WeaponHandler : MonoBehaviour
 
     void Start()
     {
+        myHealth = GetComponent<Health>();
         if (!usePlayerInput)
         {
             targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -49,15 +51,70 @@ public class WeaponHandler : MonoBehaviour
         
         if (Time.time < nextAttackTime) return;
 
-        nextAttackTime = Time.time + (1f / weapon.fireRate);
+        float fireRate = weapon.fireRate;
+        if (inventory.currentTool != null && inventory.currentTool.toolName == "Berserker's Skull")
+        {
+            fireRate *= 1.5f;
+            if (myHealth != null) myHealth.TakeDamage(1f);
+        }
 
-        if (weapon.isRanged)
+        nextAttackTime = Time.time + (1f / fireRate);
+
+        if (weapon.projectilePrefab != null)
+        {
+            FireProjectile(weapon, spreadAngle);
+        }
+        else if (weapon.isRanged)
         {
             FireRifle(weapon, spreadAngle);
         }
         else
         {
             SwingSword(weapon);
+        }
+    }
+
+    private void FireProjectile(WeaponData weapon, float spreadAngle)
+    {
+        weaponVisuals.TriggerRecoil();
+        
+        Vector2 aimDir = (AimPosition - transform.position).normalized;
+        if (spreadAngle > 0)
+        {
+            float randomAngle = Random.Range(-spreadAngle, spreadAngle);
+            aimDir = Quaternion.Euler(0, 0, randomAngle) * aimDir;
+        }
+
+        Vector3 muzzlePos = weaponVisuals.transform.position + (weaponVisuals.transform.right * weapon.muzzleOffset.x) + (weaponVisuals.transform.up * weapon.muzzleOffset.y);
+        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+
+        GameObject projObj = Instantiate(weapon.projectilePrefab, muzzlePos, Quaternion.Euler(0, 0, angle));
+
+        Collider2D projCollider = projObj.GetComponent<Collider2D>();
+        Collider2D[] ownerColliders = GetComponentsInChildren<Collider2D>();
+
+        if (projCollider != null)
+        {
+            foreach (Collider2D ownerCol in ownerColliders)
+            {
+                Physics2D.IgnoreCollision(projCollider, ownerCol);
+            }
+        }
+
+        SimpleProjectile projScript = projObj.GetComponent<SimpleProjectile>();
+        
+        if (projScript != null)
+        {
+            projScript.damage = weapon.damage;
+            projScript.knockbackForce = knockbackForce * 0.2f; 
+            projScript.speed = weapon.projectileSpeed;
+            projScript.owner = gameObject;
+            projScript.hitLayers = enemyLayer;
+
+            if (inventory.currentTool != null && inventory.currentTool.toolName == "Vampire Ring")
+            {
+                projScript.isVampiric = true;
+            }
         }
     }
 
@@ -73,7 +130,6 @@ public class WeaponHandler : MonoBehaviour
         {
             float angle = (facingDir > 0) ? 0f : 180f;
             Quaternion rot = Quaternion.Euler(0, 0, angle);
-            
             Instantiate(weapon.attackVFX, hitPoint, rot);
         }
 
@@ -88,6 +144,8 @@ public class WeaponHandler : MonoBehaviour
             {
                 targetHealth.TakeDamage(weapon.damage);
             }
+            
+            CheckVampireHeal();
 
             Vector2 direction = (hit.transform.position - transform.position).normalized;
             Vector2 force = direction * knockbackForce;
@@ -150,6 +208,7 @@ public class WeaponHandler : MonoBehaviour
             if (targetHealth != null)
             {
                 targetHealth.TakeDamage(weapon.damage);
+                CheckVampireHeal();
             }
 
             Vector2 force = aimDir * knockbackForce * 0.35f;
@@ -181,6 +240,14 @@ public class WeaponHandler : MonoBehaviour
         {
             BulletTracer tracer = Instantiate(tracerPrefab, Vector3.zero, Quaternion.identity);
             tracer.Initialize(tracerStart, tracerEnd);
+        }
+    }
+
+    private void CheckVampireHeal()
+    {
+        if (inventory.currentTool != null && inventory.currentTool.toolName == "Vampire Ring")
+        {
+            if (myHealth != null) myHealth.Heal(2f);
         }
     }
 

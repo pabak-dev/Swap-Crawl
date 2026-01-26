@@ -18,12 +18,13 @@ public class Health : MonoBehaviour
     private SpriteRenderer sr;
     private Material originalMaterial;
     private Coroutine flashRoutine;
+    private EntityInventory inventory;
 
     private void Awake()
     {
         currentHealth = maxHealth;
-        
         sr = GetComponentInChildren<SpriteRenderer>();
+        inventory = GetComponent<EntityInventory>();
 
         if (sr != null)
         {
@@ -38,8 +39,20 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        Debug.Log($"{name} healed {amount}! HP: {currentHealth}");
+    }
+
     public void TakeDamage(float amount)
     {
+        if (inventory != null && inventory.currentTool != null && inventory.currentTool.toolName == "Vampire Ring")
+        {
+            amount *= 1.5f;
+        }
+
         currentHealth -= amount;
         
         Debug.Log($"{name} took {amount} damage! HP: {currentHealth}");

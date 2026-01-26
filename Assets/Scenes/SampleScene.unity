@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 14877223}
   - component: {fileID: 14877224}
   - component: {fileID: 14877225}
+  - component: {fileID: 14877226}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -307,6 +308,21 @@ MonoBehaviour:
   usePlayerInput: 1
   targetTransform: {fileID: 0}
   knockbackForce: 5
+--- !u!114 &14877226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14877217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73fb268832cd0654ba9f288aeb7eb46d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HotPotato
+  explodeTime: 5
+  explosionDamage: 30
+  timerText: {fileID: 0}
 --- !u!1 &46208384
 GameObject:
   m_ObjectHideFlags: 0
@@ -7603,6 +7619,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 941637549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1268053045451864846
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114878674121574407, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_Name
+      value: Skeleton_duck
+      objectReference: {fileID: 0}
+    - target: {fileID: 2505994215823311453, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: maxFireDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2505994215823311453, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: minFireDelay
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4029581216197888943, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: currentTool
+      value: 
+      objectReference: {fileID: 11400000, guid: fadbd719383ccdd4eab56003f40e77d4, type: 2}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805749894015471708, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
 --- !u!1 &1374073722787005145
 GameObject:
   m_ObjectHideFlags: 0
@@ -7646,6 +7731,10 @@ PrefabInstance:
     - target: {fileID: 910583140852846318, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
       propertyPath: m_Name
       value: Skeleton_sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 910583140852846318, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3948495437908076589, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7700,13 +7789,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3121563489529622442, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
-      propertyPath: currentTool
-      value: 
-      objectReference: {fileID: 11400000, guid: 1465b7e0fb12e744fb93ee0d3fca061b, type: 2}
     - target: {fileID: 4905109130807867285, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
       propertyPath: m_Name
       value: Skeleton_rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905109130807867285, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5937609694021914176, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7766,8 +7855,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwapReticle
   reticlePrefab: {fileID: 7139721152095763612, guid: 302e7d368f624344dbbb0708d90f0116, type: 3}
-  selectedColor: {r: 0.2688679, g: 1, b: 0.2688679, a: 0.627451}
-  cooldownColor: {r: 1, g: 0.2, b: 0.2, a: 0.5}
+  selectedColor: {r: 0.23082057, g: 0.8584906, b: 0.23082057, a: 0.78431374}
+  cooldownColor: {r: 0.8962264, g: 0.15641688, b: 0.15641688, a: 0.7058824}
   availableColor: {r: 1, g: 1, b: 1, a: 0.627451}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -7777,6 +7866,7 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 14877219}
   - {fileID: 8797445404646073430}
+  - {fileID: 1268053045451864846}
   - {fileID: 5140616655900431233}
   - {fileID: 1426089277}
   - {fileID: 3972393794795772370}

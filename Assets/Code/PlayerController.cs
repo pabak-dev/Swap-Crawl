@@ -153,6 +153,15 @@ public class PlayerController : MonoBehaviour
             myInventory.SwapItems(currentHoverTarget, type);
             lastSwapTime = Time.time;
 
+            if (type == EntityInventory.SwapType.Tool)
+            {
+                HotPotato myPotato = GetComponent<HotPotato>();
+                if (myPotato != null) myPotato.Arm();
+
+                HotPotato targetPotato = currentHoverTarget.GetComponent<HotPotato>();
+                if (targetPotato != null) targetPotato.Arm();
+            }
+
             if (swapZapPrefab != null)
             {
                 SwapZap zap = Instantiate(swapZapPrefab, transform.position, Quaternion.identity);
