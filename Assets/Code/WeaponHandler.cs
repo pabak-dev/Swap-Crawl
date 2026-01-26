@@ -20,6 +20,7 @@ public class WeaponHandler : MonoBehaviour
     private Health myHealth;
 
     public Image reloadFill;
+    public AudioClip swingSFX, shootSFX;
 
     private Vector3 AimPosition
     {
@@ -138,6 +139,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void SwingSword(WeaponData weapon)
     {
+        GlobalSFX.Instance.Play(swingSFX);
         weaponVisuals.TriggerSwing();
 
         float facingDir = Mathf.Sign(weaponVisuals.bodyTransform.localScale.x);
@@ -194,6 +196,7 @@ public class WeaponHandler : MonoBehaviour
     {
         if (Time.timeScale == 0f) return;
 
+        GlobalSFX.Instance.Play(shootSFX);
         weaponVisuals.TriggerRecoil();
 
         Vector2 aimDir = (AimPosition - transform.position).normalized;

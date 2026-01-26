@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public LineRenderer aimLine;
 
     public RectTransform swapTimerFill;
+    public AudioClip swapWeaponSFX, swapToolSFX;
 
     private void Awake()
     {
@@ -170,6 +171,8 @@ public class PlayerController : MonoBehaviour
     {
         if (currentHoverTarget != null && IsSwapReady)
         {
+            GlobalSFX.Instance.Play(type == EntityInventory.SwapType.Weapon ? swapWeaponSFX : swapToolSFX);
+
             myInventory.SwapItems(currentHoverTarget, type);
             lastSwapTime = Time.time;
 

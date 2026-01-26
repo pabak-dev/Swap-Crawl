@@ -13,6 +13,7 @@ public class SimpleProjectile : MonoBehaviour
     private Rigidbody2D rb;
 
     public bool isVampiric;
+    public AudioClip hitSFX;
 
     private void Awake()
     {
@@ -57,6 +58,8 @@ public class SimpleProjectile : MonoBehaviour
             else if (ai != null) ai.ApplyKnockback(dir * knockbackForce);
             else targetRb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
         }
+
+        GlobalSFX.Instance.Play(hitSFX);
 
         Destroy(gameObject);
     }

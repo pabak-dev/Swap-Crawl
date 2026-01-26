@@ -223,6 +223,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 0}
   flashDuration: 0.1
   poof_VFX: {fileID: 7246003833052837797, guid: 12c4539101e95a94db56196af6dec4bf, type: 3}
+  gameOverPanel: {fileID: 0}
 --- !u!114 &5224798488588182595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +246,8 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   knockbackForce: 8
   reloadFill: {fileID: 0}
+  swingSFX: {fileID: 8300000, guid: ba85535dbda66b744acda52f7605961c, type: 3}
+  shootSFX: {fileID: 8300000, guid: a6142adec34c53f4ba6683f684c67adf, type: 3}
 --- !u!114 &8953146542816060721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,13 +261,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   playerTarget: {fileID: 0}
-  detectionRange: 10
+  detectionRange: 20
   moveSpeed: 2
   stopDistanceRanged: 6
   stopDistanceMelee: 0.65
   aimSpread: 7.5
-  minFireDelay: 0.1
-  maxFireDelay: 0.4
   feetDustPrefab: {fileID: 9024370011107915148, guid: 930579a6435420443939ec4d5a7816f2, type: 3}
   feetTransform: {fileID: 132973560326311835}
   dustSpawnRate: 0.35
@@ -283,6 +284,8 @@ MonoBehaviour:
   explodeTime: 5
   explosionDamage: 30
   timerText: {fileID: 1698838500926484055}
+  explosionVFX: {fileID: 2660922250751743215, guid: f3aeb73246cf2ba409049e9b4792fb89, type: 3}
+  explosionClip: {fileID: 8300000, guid: 9ce362a002ad4b54a9ad54a8804c46e9, type: 3}
 --- !u!1 &1404617887192691542
 GameObject:
   m_ObjectHideFlags: 0

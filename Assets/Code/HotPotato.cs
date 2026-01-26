@@ -14,6 +14,8 @@ public class HotPotato : MonoBehaviour
     private float timer;
     private bool isArmed;
     private bool hasPotato;
+    public GameObject explosionVFX;
+    public AudioClip explosionClip;
 
     private void Awake()
     {
@@ -80,7 +82,11 @@ public class HotPotato : MonoBehaviour
         if (health != null)
         {
             health.TakeDamage(explosionDamage);
+
+            GlobalSFX.Instance.Play(explosionClip);
+            Destroy(Instantiate(explosionVFX, transform.position, Quaternion.identity), 2f);
         }
+        
         ResetPotato();
     }
 }

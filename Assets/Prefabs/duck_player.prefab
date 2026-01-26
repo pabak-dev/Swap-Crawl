@@ -186,3 +186,5 @@ MonoBehaviour:
   hitLayers:
     serializedVersion: 2
     m_Bits: 192
+  isVampiric: 0
+  hitSFX: {fileID: 8300000, guid: c650b3c2dae5ba344addf25ad03a360e, type: 3}
