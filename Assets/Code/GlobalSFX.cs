@@ -11,6 +11,7 @@ public class GlobalSFX : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

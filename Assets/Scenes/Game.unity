@@ -50632,6 +50632,7 @@ GameObject:
   - component: {fileID: 133859343}
   - component: {fileID: 133859342}
   - component: {fileID: 133859341}
+  - component: {fileID: 133859344}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -50657,7 +50658,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: 280, y: 80}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133859341
 MonoBehaviour:
@@ -50728,14 +50729,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.79607844, b: 0.654902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6b82512fdb49ff6419ad90c9854630bf, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -50753,6 +50754,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133859339}
   m_CullTransparentMesh: 1
+--- !u!114 &133859344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133859339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdbd9a1a98a2924bb37754d2bdbc964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonFX
+  hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
+  clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
+  ignoreIfNotInteractable: 1
 --- !u!1 &163303509
 GameObject:
   m_ObjectHideFlags: 0
@@ -50806,14 +50822,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.9843137}
+  m_Color: {r: 0.78431374, g: 0.5484637, b: 0.4745098, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f9e1e36e602251f4dbe13662bedc9bfc, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -50822,7 +50838,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.65
 --- !u!222 &163303512
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -51027,14 +51043,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.9843137}
+  m_Color: {r: 0.53417903, g: 0.4764596, b: 0.7830189, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f9e1e36e602251f4dbe13662bedc9bfc, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -51043,7 +51059,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.65
 --- !u!222 &204634433
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -51064,6 +51080,7 @@ GameObject:
   - component: {fileID: 218357471}
   - component: {fileID: 218357470}
   - component: {fileID: 218357469}
+  - component: {fileID: 218357472}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -51089,7 +51106,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -130}
-  m_SizeDelta: {x: 280, y: 80}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &218357469
 MonoBehaviour:
@@ -51160,14 +51177,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.79607844, b: 0.654902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6b82512fdb49ff6419ad90c9854630bf, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -51185,6 +51202,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218357467}
   m_CullTransparentMesh: 1
+--- !u!114 &218357472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218357467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdbd9a1a98a2924bb37754d2bdbc964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonFX
+  hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
+  clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
+  ignoreIfNotInteractable: 1
 --- !u!1 &270424064
 GameObject:
   m_ObjectHideFlags: 0
@@ -52699,8 +52731,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2.7500033}
+  m_SizeDelta: {x: 0, y: -5.4999933}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &628046133
 MonoBehaviour:
@@ -53369,8 +53401,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2.75}
+  m_SizeDelta: {x: 0, y: -5.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &887560671
 MonoBehaviour:
@@ -53651,6 +53683,7 @@ GameObject:
   - component: {fileID: 1052860415}
   - component: {fileID: 1052860414}
   - component: {fileID: 1052860413}
+  - component: {fileID: 1052860416}
   m_Layer: 5
   m_Name: Restart Button
   m_TagString: Untagged
@@ -53676,7 +53709,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 280, y: 80}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1052860413
 MonoBehaviour:
@@ -53747,14 +53780,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.7968656, b: 0.654902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6b82512fdb49ff6419ad90c9854630bf, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -53772,6 +53805,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052860411}
   m_CullTransparentMesh: 1
+--- !u!114 &1052860416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052860411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdbd9a1a98a2924bb37754d2bdbc964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonFX
+  hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
+  clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
+  ignoreIfNotInteractable: 1
 --- !u!1 &1081620442
 GameObject:
   m_ObjectHideFlags: 0
@@ -63289,6 +63337,7 @@ GameObject:
   - component: {fileID: 1345480220}
   - component: {fileID: 1345480219}
   - component: {fileID: 1345480218}
+  - component: {fileID: 1345480221}
   m_Layer: 5
   m_Name: Restart Button
   m_TagString: Untagged
@@ -63314,7 +63363,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 280, y: 80}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1345480218
 MonoBehaviour:
@@ -63385,14 +63434,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7882353, g: 1, b: 0.654902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6b82512fdb49ff6419ad90c9854630bf, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -63410,6 +63459,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345480216}
   m_CullTransparentMesh: 1
+--- !u!114 &1345480221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345480216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdbd9a1a98a2924bb37754d2bdbc964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonFX
+  hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
+  clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
+  ignoreIfNotInteractable: 1
 --- !u!1 &1350221441
 GameObject:
   m_ObjectHideFlags: 0
@@ -63444,8 +63508,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2.75}
+  m_SizeDelta: {x: 0, y: -5.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1350221443
 MonoBehaviour:
@@ -63777,8 +63841,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2.7500033}
+  m_SizeDelta: {x: 0, y: -5.4999933}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1466443935
 MonoBehaviour:
@@ -64052,8 +64116,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2.7500033}
+  m_SizeDelta: {x: 0, y: -5.4999933}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1712619404
 MonoBehaviour:
@@ -64580,6 +64644,7 @@ GameObject:
   - component: {fileID: 1979021471}
   - component: {fileID: 1979021470}
   - component: {fileID: 1979021469}
+  - component: {fileID: 1979021472}
   m_Layer: 5
   m_Name: Resume Button
   m_TagString: Untagged
@@ -64605,7 +64670,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 280, y: 80}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1979021469
 MonoBehaviour:
@@ -64676,14 +64741,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7873405, g: 1, b: 0.6556604, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6b82512fdb49ff6419ad90c9854630bf, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -64701,6 +64766,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979021467}
   m_CullTransparentMesh: 1
+--- !u!114 &1979021472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979021467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdbd9a1a98a2924bb37754d2bdbc964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonFX
+  hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
+  clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
+  ignoreIfNotInteractable: 1
 --- !u!1 &2006309250
 GameObject:
   m_ObjectHideFlags: 0
