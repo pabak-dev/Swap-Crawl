@@ -587,6 +587,7 @@ MonoBehaviour:
   squashSpeed: 18
   isKnockedBack: 0
   toolOverlay: {fileID: 3839080115546618087}
+  weaponRenderer: {fileID: 2561233115523194060}
   flashMaterial: {fileID: 2100000, guid: ba4ee29175bdd29408bcb5627027e666, type: 2}
 --- !u!1 &3638468984791797745
 GameObject:

@@ -73,7 +73,7 @@ public class WeaponHandler : MonoBehaviour
         float fireRate = weapon.fireRate;
         if (inventory.currentTool != null && inventory.currentTool.toolName == "Berserker's Skull")
         {
-            fireRate *= 1.5f;
+            fireRate *= 2f;
             if (myHealth != null) myHealth.TakeDamage(1f);
         }
 
@@ -230,7 +230,7 @@ public class WeaponHandler : MonoBehaviour
             Health targetHealth = hit.collider.GetComponent<Health>();
             if (targetHealth != null)
             {
-                targetHealth.TakeDamage(weapon.damage);
+                targetHealth.TakeDamage(weapon.damage * (usePlayerInput ? 1 : 0.4f));
                 CheckVampireHeal();
             }
 

@@ -14,6 +14,7 @@ public class BodyVisuals : MonoBehaviour
     private Vector3 originalScale;
     private SpriteRenderer sr;
     public SpriteRenderer toolOverlay;
+    public SpriteRenderer weaponRenderer;
 
     private Material originalMaterial;
     public Material flashMaterial;
@@ -38,6 +39,11 @@ public class BodyVisuals : MonoBehaviour
         {
             sr.sortingOrder = Mathf.RoundToInt(transform.position.y * -100f);
             
+            if (weaponRenderer != null)
+            {
+                weaponRenderer.sortingOrder = sr.sortingOrder + 2;
+            }
+
             if (toolOverlay != null)
             {
                 toolOverlay.sortingOrder = sr.sortingOrder + 1;

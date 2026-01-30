@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   playerTarget: {fileID: 0}
   detectionRange: 20
-  moveSpeed: 2
+  moveSpeed: 2.75
   stopDistanceRanged: 6
   stopDistanceMelee: 0.65
   aimSpread: 7.5
@@ -420,6 +420,7 @@ MonoBehaviour:
   squashSpeed: 18
   isKnockedBack: 0
   toolOverlay: {fileID: 6430377359738338863}
+  weaponRenderer: {fileID: 6098283687829470887}
   flashMaterial: {fileID: 2100000, guid: ba4ee29175bdd29408bcb5627027e666, type: 2}
 --- !u!1 &1573982070838639712
 GameObject:

@@ -265,7 +265,7 @@ MonoBehaviour:
   moveSpeed: 2
   stopDistanceRanged: 6
   stopDistanceMelee: 0.65
-  aimSpread: 7.5
+  aimSpread: 12.5
   feetDustPrefab: {fileID: 9024370011107915148, guid: 930579a6435420443939ec4d5a7816f2, type: 3}
   feetTransform: {fileID: 7024969403489963682}
   dustSpawnRate: 0.35
@@ -903,6 +903,7 @@ MonoBehaviour:
   squashSpeed: 18
   isKnockedBack: 0
   toolOverlay: {fileID: 3096782295862686358}
+  weaponRenderer: {fileID: 4520240569828162348}
   flashMaterial: {fileID: 2100000, guid: ba4ee29175bdd29408bcb5627027e666, type: 2}
 --- !u!1 &8696781496863930640
 GameObject:

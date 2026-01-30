@@ -97,11 +97,6 @@ public class WeaponVisuals : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
-
-        if (bodyRenderer != null)
-        {
-            sr.sortingOrder = bodyRenderer.sortingOrder + 10;
-        }
     }
 
     private void HandleMeleeBehavior()
@@ -123,8 +118,6 @@ public class WeaponVisuals : MonoBehaviour
                 transform.parent.localPosition = new Vector3(targetParentX, parentDefaultPos.y, parentDefaultPos.z);
             }
         }
-
-        sr.sortingOrder = bodyRenderer.sortingOrder + 10;
 
         HandleSmoothAiming(facingDir);
     }
