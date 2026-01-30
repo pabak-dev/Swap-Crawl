@@ -14,6 +14,11 @@ public class EnemyAI : MonoBehaviour
     public float stopDistanceRanged = 5f;
     public float stopDistanceMelee = 1f;
 
+    [Header("Navigation")]
+    public LayerMask obstacleLayer;
+    public float obstacleCheckDistance = 1.5f;
+    public float enemyWidth = 0.5f;
+
     [Header("Combat Stats")]
     public float aimSpread = 15f;
 
@@ -51,7 +56,11 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        if (playerTarget == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null) playerTarget = player.transform;
+        }
         
         currentFireTimer = Random.Range(0.5f, 1f);
     }
@@ -74,8 +83,10 @@ public class EnemyAI : MonoBehaviour
             dustTimer -= Time.deltaTime;
             if (dustTimer <= 0f)
             {
-                GameObject dust = Instantiate(feetDustPrefab, feetTransform.position, Quaternion.identity);
-                Destroy(dust, 1f);
+                if (feetDustPrefab && feetTransform) {
+                     GameObject dust = Instantiate(feetDustPrefab, feetTransform.position, Quaternion.identity);
+                     Destroy(dust, 1f);
+                }
                 dustTimer = dustSpawnRate;
             }
         }
@@ -117,7 +128,7 @@ public class EnemyAI : MonoBehaviour
             weaponVisuals.targetTransform = playerTarget;
         }
 
-        Vector2 direction = (playerTarget.position - transform.position).normalized;
+        Vector2 directToPlayer = (playerTarget.position - transform.position).normalized;
 
         float minFireDelay = isRanged ? 0.25f : 0.1f;
         float maxFireDelay = isRanged ? 0.75f : 0.3f;
@@ -125,7 +136,9 @@ public class EnemyAI : MonoBehaviour
         if (distance > requiredDistance)
         {
             float toolSpeedMult = (inventory.currentTool != null) ? inventory.currentTool.moveSpeedMultiplier : 1f;
-            rb.linearVelocity = direction * moveSpeed * toolSpeedMult;
+
+            Vector2 smartMoveDir = GetDirectionWithAvoidance(directToPlayer);
+            rb.linearVelocity = moveSpeed * toolSpeedMult * smartMoveDir;
             
             currentFireTimer = Random.Range(minFireDelay, maxFireDelay);
         }
@@ -147,14 +160,56 @@ public class EnemyAI : MonoBehaviour
 
         if (visualBody != null)
         {
-            if (direction.x > 0)
+            if (directToPlayer.x > 0)
             {
                 visualBody.localScale = new Vector3(Mathf.Abs(visualBody.localScale.x), visualBody.localScale.y, visualBody.localScale.z);
             }
-            else if (direction.x < 0)
+            else if (directToPlayer.x < 0)
             {
                 visualBody.localScale = new Vector3(-Mathf.Abs(visualBody.localScale.x), visualBody.localScale.y, visualBody.localScale.z);
             }
+        }
+    }
+
+    private Vector2 GetDirectionWithAvoidance(Vector2 desiredDir)
+    {
+        if (obstacleLayer == 0) return desiredDir;
+
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, enemyWidth, desiredDir, obstacleCheckDistance, obstacleLayer);
+
+        if (hit.collider == null)
+        {
+            return desiredDir;
+        }
+
+        float[] candidateAngles = { 45f, -45f, 90f, -90f };
+
+        foreach (float angle in candidateAngles)
+        {
+            Vector2 rotatedDir = Quaternion.Euler(0, 0, angle) * desiredDir;
+            
+            hit = Physics2D.CircleCast(transform.position, enemyWidth, rotatedDir, obstacleCheckDistance * 0.75f, obstacleLayer);
+            
+            if (hit.collider == null)
+            {
+                return Vector2.Lerp(desiredDir, rotatedDir, 0.7f).normalized;
+            }
+        }
+
+        return desiredDir;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        Gizmos.color = Color.red;
+        if (playerTarget != null)
+        {
+            Vector2 dir = (playerTarget.position - transform.position).normalized;
+            Gizmos.DrawLine(transform.position, transform.position + (Vector3)dir * obstacleCheckDistance);
+            Gizmos.DrawWireSphere(transform.position + (Vector3)dir * obstacleCheckDistance, enemyWidth);
         }
     }
 }
