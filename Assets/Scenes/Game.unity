@@ -50769,6 +50769,7 @@ MonoBehaviour:
   hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
   clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
   ignoreIfNotInteractable: 1
+  hoverScale: 1.1
 --- !u!1 &163303509
 GameObject:
   m_ObjectHideFlags: 0
@@ -51217,6 +51218,7 @@ MonoBehaviour:
   hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
   clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
   ignoreIfNotInteractable: 1
+  hoverScale: 1.1
 --- !u!1 &270424064
 GameObject:
   m_ObjectHideFlags: 0
@@ -51720,10 +51722,9 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 114878674121574407, guid: 609b2ddc9c905ea469774550c3d55833, type: 3}
   - {fileID: 4905109130807867285, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
-  - {fileID: 910583140852846318, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
   - {fileID: 4905109130807867285, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
   - {fileID: 910583140852846318, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
-  - {fileID: 4905109130807867285, guid: e3e1c60b8a464824a8a480f03d6fa77b, type: 3}
+  - {fileID: 910583140852846318, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
   - {fileID: 910583140852846318, guid: d4a7a0c769a02ea47bc37e69a8cccc6d, type: 3}
   startWaveKey: 103
   waveInfoText: {fileID: 1246473432}
@@ -53820,6 +53821,7 @@ MonoBehaviour:
   hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
   clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
   ignoreIfNotInteractable: 1
+  hoverScale: 1.1
 --- !u!1 &1081620442
 GameObject:
   m_ObjectHideFlags: 0
@@ -63474,6 +63476,7 @@ MonoBehaviour:
   hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
   clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
   ignoreIfNotInteractable: 1
+  hoverScale: 1.1
 --- !u!1 &1350221441
 GameObject:
   m_ObjectHideFlags: 0
@@ -64781,6 +64784,7 @@ MonoBehaviour:
   hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
   clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
   ignoreIfNotInteractable: 1
+  hoverScale: 1.1
 --- !u!1 &2006309250
 GameObject:
   m_ObjectHideFlags: 0
