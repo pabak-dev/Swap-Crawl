@@ -547,6 +547,7 @@ MonoBehaviour:
   hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
   clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
   ignoreIfNotInteractable: 1
+  hoverScale: 1.1
 --- !u!1 &306941714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1294,7 @@ MonoBehaviour:
   hoverSound: {fileID: 8300000, guid: 1ffeaa8ab3023a34ca9ab5666d71c439, type: 3}
   clickSound: {fileID: 8300000, guid: 24dcbdb8e5c95b3459d99e3337db66fc, type: 3}
   ignoreIfNotInteractable: 1
+  hoverScale: 1.1
 --- !u!1 &1436321698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,10 +1481,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
