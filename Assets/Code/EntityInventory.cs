@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityInventory : MonoBehaviour
 {
@@ -8,6 +10,10 @@ public class EntityInventory : MonoBehaviour
     public ToolData currentTool;
     public SpriteRenderer heldItemRenderer;
     public BodyVisuals bodyVisuals;
+
+    public bool isPlayer;
+    public TextMeshProUGUI toolNameText;
+    public Image toolIconImage;
 
     private void Start()
     {
@@ -56,6 +62,19 @@ public class EntityInventory : MonoBehaviour
             {
                 bodyVisuals.toolOverlay.sprite = null;
             }
+        }
+
+        if (isPlayer)
+        {
+            toolIconImage.sprite = currentTool != null ? currentTool.visualIndicator : null;
+            toolIconImage.enabled = currentTool != null;
+
+            string descText;
+            descText = currentTool != null ? currentTool.toolName : "No Tool Equipped";
+            descText += "\n";
+            descText += currentTool != null ? currentTool.description : "No effects";
+
+            toolNameText.text = descText;
         }
     }
 }

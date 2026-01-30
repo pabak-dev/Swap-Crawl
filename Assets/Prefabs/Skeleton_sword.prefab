@@ -153,7 +153,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5651c6d51d2090f40bab21daf91e0f21, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -202,9 +202,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityInventory
   currentWeapon: {fileID: 11400000, guid: 0acfb2ec6b507ed40a10db4d14acd6b3, type: 2}
-  currentTool: {fileID: 11400000, guid: a88f56b380fb9a54eb1f1b207736c5fb, type: 2}
+  currentTool: {fileID: 0}
   heldItemRenderer: {fileID: 6098283687829470887}
   bodyVisuals: {fileID: 8145308348165521165}
+  isPlayer: 0
+  toolNameText: {fileID: 0}
+  toolIconImage: {fileID: 0}
 --- !u!114 &1651885821977120123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   playerTarget: {fileID: 0}
-  detectionRange: 20
+  detectionRange: 25
   moveSpeed: 2.75
   stopDistanceRanged: 6
   stopDistanceMelee: 0.65
@@ -284,6 +287,7 @@ MonoBehaviour:
   explodeTime: 5
   explosionDamage: 30
   timerText: {fileID: 1698838500926484055}
+  timer: 0
   explosionVFX: {fileID: 2660922250751743215, guid: f3aeb73246cf2ba409049e9b4792fb89, type: 3}
   explosionClip: {fileID: 8300000, guid: 9ce362a002ad4b54a9ad54a8804c46e9, type: 3}
 --- !u!1 &1404617887192691542

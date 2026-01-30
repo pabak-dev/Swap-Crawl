@@ -16,3 +16,5 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   isCursed: 1
   visualIndicator: {fileID: 21300000, guid: a50a6c9e1b4c4c340bdda55b8e45ca95, type: 3}
+  description: <color="green">+5</color> HP per hit, <color="red">X1.5</color> DMG
+    taken

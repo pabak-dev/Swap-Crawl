@@ -42,7 +42,7 @@ public class SimpleProjectile : MonoBehaviour
             if (isVampiric && owner != null)
             {
                 Health ownerHealth = owner.GetComponent<Health>();
-                if (ownerHealth != null) ownerHealth.Heal(2f);
+                if (ownerHealth != null) ownerHealth.Heal(5f);
             }
         }
 

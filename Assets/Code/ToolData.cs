@@ -7,4 +7,5 @@ public class ToolData : ScriptableObject
     public float moveSpeedMultiplier = 1f;
     public bool isCursed;
     public Sprite visualIndicator;
+    [TextArea] public string description;
 }

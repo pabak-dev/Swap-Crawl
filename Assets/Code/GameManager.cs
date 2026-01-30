@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             {
                 waveTimer -= Time.deltaTime;
                 
-                UpdateWaveUI($"Wave {waveNumber - 1} survived. Press '{startWaveKey}' for next! ({Mathf.CeilToInt(waveTimer)})");
+                UpdateWaveUI($"Press '{startWaveKey}' for wave {waveNumber}. ({Mathf.CeilToInt(waveTimer)})");
 
                 if (Input.GetKeyDown(startWaveKey) || waveTimer <= 0f)
                 {
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         if (roadBlockToRoom1 != null) roadBlockToRoom1.SetActive(true);
         if (roadBlockToRoom2 != null) roadBlockToRoom2.SetActive(false);
 
-        UpdateWaveUI($"Ready! Press '{startWaveKey}' for Wave " + waveNumber);
+        StartWaveCountdown();
     }
 
     public void OnEnemyKilled()
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     private void StartWaveCountdown()
     {
         waitingForNextWave = true;
-        waveTimer = 10f;
+        waveTimer = 6f;
     }
 
     private void SpawnWave()

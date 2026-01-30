@@ -179,9 +179,14 @@ public class PlayerController : MonoBehaviour
             if (type == EntityInventory.SwapType.Tool)
             {
                 HotPotato myPotato = GetComponent<HotPotato>();
-                if (myPotato != null) myPotato.Arm();
-
                 HotPotato targetPotato = currentHoverTarget.GetComponent<HotPotato>();
+
+                float temp = myPotato.timer;
+                myPotato.timer = targetPotato.timer;
+                targetPotato.timer = temp;
+
+
+                if (myPotato != null) myPotato.Arm();
                 if (targetPotato != null) targetPotato.Arm();
             }
 

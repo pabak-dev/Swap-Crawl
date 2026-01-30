@@ -16,3 +16,5 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   isCursed: 1
   visualIndicator: {fileID: 21300000, guid: d2a25342f9bcd824a912a7afc1b49371, type: 3}
+  description: <color="green">X2</color> ATK speed, <color="red">-1</color> HP per
+    hit

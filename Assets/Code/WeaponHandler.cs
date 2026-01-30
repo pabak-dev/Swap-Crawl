@@ -270,7 +270,7 @@ public class WeaponHandler : MonoBehaviour
     {
         if (inventory.currentTool != null && inventory.currentTool.toolName == "Vampire Ring")
         {
-            if (myHealth != null) myHealth.Heal(2f);
+            if (myHealth != null) myHealth.Heal(5f);
         }
     }
 

@@ -11,7 +11,7 @@ public class HotPotato : MonoBehaviour
 
     private EntityInventory inventory;
     private Health health;
-    private float timer;
+    public float timer;
     private bool isArmed;
     private bool hasPotato;
     public GameObject explosionVFX;
@@ -21,6 +21,11 @@ public class HotPotato : MonoBehaviour
     {
         inventory = GetComponent<EntityInventory>();
         health = GetComponent<Health>();
+    }
+
+    void Start()
+    {
+        timer = explodeTime;
     }
 
     public void Arm()
@@ -47,7 +52,6 @@ public class HotPotato : MonoBehaviour
             if (!hasPotato)
             {
                 hasPotato = true;
-                timer = explodeTime;
             }
 
             timer -= Time.deltaTime;
@@ -82,10 +86,30 @@ public class HotPotato : MonoBehaviour
         if (health != null)
         {
             health.TakeDamage(explosionDamage);
-
-            GlobalSFX.Instance.Play(explosionClip);
-            Destroy(Instantiate(explosionVFX, transform.position, Quaternion.identity), 2f);
         }
+
+        Health[] allHealthComponents = FindObjectsByType<Health>(FindObjectsSortMode.None);
+
+        float radiusSqr = 1 * 1;
+        Vector3 explosionCenter = transform.position;
+
+        foreach (Health h in allHealthComponents)
+        {
+            if (h == null || h == health) continue;
+
+            float distSqr = (h.transform.position - explosionCenter).sqrMagnitude;
+
+            if (distSqr <= radiusSqr)
+            {
+                h.TakeDamage(explosionDamage);
+            }
+        }
+
+        inventory.currentTool = null;
+        inventory.UpdateVisuals();
+
+        GlobalSFX.Instance.Play(explosionClip);
+        Destroy(Instantiate(explosionVFX, transform.position, Quaternion.identity), 2f);
         
         ResetPotato();
     }
